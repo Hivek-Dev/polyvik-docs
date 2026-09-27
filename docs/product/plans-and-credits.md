@@ -214,7 +214,7 @@ iterations it used).
 | Request an extra | `POST /api/plan/request` | creates a `plan_requests` row; emails `PLAN_REQUESTS_EMAIL` if set |
 | Stripe | `POST /api/plan/checkout`, `/checkout-extra`, `/portal`; webhook `POST /api/webhooks/stripe` | see §8 |
 | Staff: tenants | `GET /api/admin/tenants` | includes plan summary, price and margin |
-| Staff: plan | `GET` / `PUT /api/admin/tenants/:id/plan` `{ plan, limits: { campaignsPerMonth, maxBrands }, periodStart }` | updated plan |
+| Staff: plan | `GET` / `PUT /api/admin/tenants/:id/plan` `{ plan, limits: { campaignsPerMonth, maxBrands, credits: { iteration, image, assist, video } }, periodStart }`. `limits` **merges** into what is already set: a missing field is kept, `null` clears a field or a credit kind (back to the plan value), and `limits: null` clears every override. Self-serve plan changes and Stripe events reset overrides with `limits: null`. | updated plan |
 | Staff: grant extras | `POST /api/admin/tenants/:id/grant` `{ kind: iteration \| campaign \| video, delta, note, requestId }` | updated plan |
 | Staff: pending requests | `GET /api/admin/plan-requests` | requests |
 

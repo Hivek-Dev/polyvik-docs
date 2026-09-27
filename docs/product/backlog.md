@@ -47,10 +47,6 @@ Built and closed by `FREE_BETA` (see [Plans and credits](plans-and-credits.md#8-
 
 - **Open** — Staff console as a screen. Today it is API only (plan per tenant,
   grant, `GET /api/admin/plan-requests`, usage).
-- **Open** — `PUT /api/admin/tenants/:id/plan` only accepts
-  `limits.campaignsPerMonth` and `limits.maxBrands`, and rewrites the whole
-  `limits` object. `planFor` also reads `limits.credits`, but there is no way
-  to set it through the API, and a plan update wipes any value set by hand.
 - **Open** — The worker does not refund the iteration when "Request changes"
   fails after its 3 attempts (`generation.services.js`, `MAX_ATTEMPTS`).
 - **Open** — "Request changes" from Home / Calendar (`RejectModal` via
