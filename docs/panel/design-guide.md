@@ -1,18 +1,18 @@
 # Polyvik Panel — Design guide
 
 For anyone writing UI in `polyvik-panel` (human or Claude Code). **If a value is not
-here or in [`src/index.css`](../../polyvik-panel/src/index.css), it does not exist.**
+here or in [`src/index.css`](../../../polyvik-panel/src/index.css), it does not exist.**
 
 Source of truth in code:
 
-- Tokens: [`src/index.css`](../../polyvik-panel/src/index.css) (`@theme`).
-- Primitives: [`src/components/ui.tsx`](../../polyvik-panel/src/components/ui.tsx).
-- Frame and navigation: [`src/components/Layout.tsx`](../../polyvik-panel/src/components/Layout.tsx).
-- Dialogs: [`src/components/DialogShell.tsx`](../../polyvik-panel/src/components/DialogShell.tsx).
-- Galleries: [`src/components/Gallery.tsx`](../../polyvik-panel/src/components/Gallery.tsx).
-- Pixel heroes: [`src/components/PixelGradient.tsx`](../../polyvik-panel/src/components/PixelGradient.tsx).
-- Notifications: [`src/lib/notify.ts`](../../polyvik-panel/src/lib/notify.ts) +
-  [`src/components/Notifications.tsx`](../../polyvik-panel/src/components/Notifications.tsx).
+- Tokens: [`src/index.css`](../../../polyvik-panel/src/index.css) (`@theme`).
+- Primitives: [`src/components/ui.tsx`](../../../polyvik-panel/src/components/ui.tsx).
+- Frame and navigation: [`src/components/Layout.tsx`](../../../polyvik-panel/src/components/Layout.tsx).
+- Dialogs: [`src/components/DialogShell.tsx`](../../../polyvik-panel/src/components/DialogShell.tsx).
+- Galleries: [`src/components/Gallery.tsx`](../../../polyvik-panel/src/components/Gallery.tsx).
+- Pixel heroes: [`src/components/PixelGradient.tsx`](../../../polyvik-panel/src/components/PixelGradient.tsx).
+- Notifications: [`src/lib/notify.ts`](../../../polyvik-panel/src/lib/notify.ts) +
+  [`src/components/Notifications.tsx`](../../../polyvik-panel/src/components/Notifications.tsx).
 
 ## The "DNA style"
 
@@ -412,7 +412,7 @@ share a selector. Do not duplicate this screen in the Lab.
 
 `/feed` shows the brand's generated images **and videos** (approved pieces are
 excluded; they live with their campaign). Styles live in
-[`src/pages/Feed.css`](../../polyvik-panel/src/pages/Feed.css), scoped to the Feed.
+[`src/pages/Feed.css`](../../../polyvik-panel/src/pages/Feed.css), scoped to the Feed.
 
 - **Hero** (a local exception to the title scale): `PixelGradient` `brasa`, cell 14,
   `colorPlacement="right"`, animated once on arrival, full opacity with no dark veil.

@@ -1,7 +1,7 @@
 # Video creation workspace
 
-`/video/create` ([`VideoCreate.tsx`](../../polyvik-panel/src/pages/VideoCreate.tsx),
-[`VideoCreate.css`](../../polyvik-panel/src/pages/VideoCreate.css)) is the video
+`/video/create` ([`VideoCreate.tsx`](../../../polyvik-panel/src/pages/VideoCreate.tsx),
+[`VideoCreate.css`](../../../polyvik-panel/src/pages/VideoCreate.css)) is the video
 counterpart of the [image workspace](image-creation-workspace.md): same full-bleed
 layout, Brasa pixel strip, starters and bottom composer. For the backend
 (`/api/video`, providers, queue, billing) see
@@ -30,7 +30,7 @@ pending.
   muted on models that support it. The direction dialog shows the model's summary
   and notes.
 - The server catalog (`GET /api/video/models`, resolved by
-  [`videoCreateOptions`](../../polyvik-panel/src/lib/videoCreateOptions.ts))
+  [`videoCreateOptions`](../../../polyvik-panel/src/lib/videoCreateOptions.ts))
   determines the available controls, including resolution-specific durations, the
   reference limit and the estimated iterations. Accounts using their own provider key
   see that billing mode instead of a platform estimate.
@@ -74,15 +74,15 @@ pending.
   composer.
 - Success shows the native player with **Saved** (opens recent videos),
   **Download**, **Open editor** (`/lab/editor`) and **New video**, plus
-  [`VideoHowMade`](../../polyvik-panel/src/components/VideoHowMade.tsx): how the
+  [`VideoHowMade`](../../../polyvik-panel/src/components/VideoHowMade.tsx): how the
   video was made, with an option to reuse its references, direction and prompt.
 - Finished videos are stored as brand assets and **appear in the Feed** with a still
   and a 3 s hover clip (`preview_url` / `poster_url`), as well as in Recent videos.
 
 ## Characters
 
-`/characters` ([`CharacterCreate.tsx`](../../polyvik-panel/src/pages/CharacterCreate.tsx),
-[`CharacterCreate.css`](../../polyvik-panel/src/pages/CharacterCreate.css)) uses the
+`/characters` ([`CharacterCreate.tsx`](../../../polyvik-panel/src/pages/CharacterCreate.tsx),
+[`CharacterCreate.css`](../../../polyvik-panel/src/pages/CharacterCreate.css)) uses the
 same workspace layout to prepare subjects for video:
 
 - Composer: optional name, description, style (Realistic / 3D / 2D) and image model

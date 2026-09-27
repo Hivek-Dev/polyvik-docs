@@ -1,9 +1,9 @@
 # Plans and credits
 
 What Polyvik sells, what each plan includes, what every action costs, and where
-the code enforces it. Source of truth: [`plans.config.js`](../../polyvik-core/src/services/plans.config.js)
+the code enforces it. Source of truth: [`plans.config.js`](../../../polyvik-core/src/services/plans.config.js)
 (`PLANS`, `MONTHLY_CREDITS`, `CAMPAIGN_ALLOWANCE`, `EXTRAS`, `FREE_BETA`,
-`OWN_KEYS_SKIP_CREDITS`) and [`quota.services.js`](../../polyvik-core/src/services/quota.services.js).
+`OWN_KEYS_SKIP_CREDITS`) and [`quota.services.js`](../../../polyvik-core/src/services/quota.services.js).
 If this page and the code disagree, the code wins; fix the page.
 
 Related: [AI usage and costs](../architecture/ai-usage-and-costs.md) ·

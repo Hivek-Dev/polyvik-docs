@@ -2,7 +2,7 @@
 
 ## Current version: coral, golden yellow and cobalt
 
-The current header combines [fashion-editorial-v2.jpg](../../polyvik-panel/public/images/feed/fashion-editorial-v2.jpg), [citrus-studio-v3.jpg](../../polyvik-panel/public/images/feed/citrus-studio-v3.jpg), and the restored [chrome-bloom-v1.jpg](../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg). The portrait anchors the brand coral; the perfume introduces warm golden yellow related to Brasa amber; the blue flower supplies cool contrast with an amber center connecting it to the warm palette. The pixel background and primary color are unchanged. The list lives in `HEADER_ARTWORK` in [`src/pages/Feed.tsx`](../../polyvik-panel/src/pages/Feed.tsx); layout and motion are described in [design-guide.md](design-guide.md#feed).
+The current header combines [fashion-editorial-v2.jpg](../../../polyvik-panel/public/images/feed/fashion-editorial-v2.jpg), [citrus-studio-v3.jpg](../../../polyvik-panel/public/images/feed/citrus-studio-v3.jpg), and the restored [chrome-bloom-v1.jpg](../../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg). The portrait anchors the brand coral; the perfume introduces warm golden yellow related to Brasa amber; the blue flower supplies cool contrast with an amber center connecting it to the warm palette. The pixel background and primary color are unchanged. The list lives in `HEADER_ARTWORK` in [`src/pages/Feed.tsx`](../../../polyvik-panel/src/pages/Feed.tsx); layout and motion are described in [design-guide.md](design-guide.md#feed).
 
 The perfume was edited with the built-in image-generation tool on 2026-09-25 from `citrus-studio-v2.jpg` (removed 26 Sep 2026). Web export: 540 × 720 JPEG, quality 84. Final prompt:
 
@@ -16,7 +16,7 @@ Edited with the built-in image-generation tool on 2026-09-25. These earlier vari
 
 Input: `fashion-editorial-v1.jpg` (removed 26 Sep 2026)
 
-Saved asset: [fashion-editorial-v2.jpg](../../polyvik-panel/public/images/feed/fashion-editorial-v2.jpg)
+Saved asset: [fashion-editorial-v2.jpg](../../../polyvik-panel/public/images/feed/fashion-editorial-v2.jpg)
 
 Final edit prompt:
 
@@ -34,7 +34,7 @@ Edit this supplied image only to harmonize its colors with the Polyvik Brasa bra
 
 ### chrome-bloom v2
 
-Input: [chrome-bloom-v1.jpg](../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg)
+Input: [chrome-bloom-v1.jpg](../../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg)
 
 Saved asset: `chrome-bloom-v2.jpg` (removed 26 Sep 2026)
 
@@ -56,7 +56,7 @@ Use case: ads-marketing. Create a unique premium fashion editorial photograph fo
 
 ### chrome-bloom
 
-Asset: [chrome-bloom-v1.jpg](../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg)
+Asset: [chrome-bloom-v1.jpg](../../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg)
 
 Final generation prompt:
 

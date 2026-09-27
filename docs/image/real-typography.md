@@ -69,6 +69,6 @@ laid out: [Text composition](text-composition.md).
   it is not part of startup or deploy.
 - Deploy core before panel.
 
-Code: [`typography.services.js`](../../polyvik-core/src/services/typography.services.js),
-[`fontFiles.services.js`](../../polyvik-core/src/services/fontFiles.services.js),
-[`integratedText.services.js`](../../polyvik-core/src/services/integratedText.services.js).
+Code: [`typography.services.js`](../../../polyvik-core/src/services/typography.services.js),
+[`fontFiles.services.js`](../../../polyvik-core/src/services/fontFiles.services.js),
+[`integratedText.services.js`](../../../polyvik-core/src/services/integratedText.services.js).

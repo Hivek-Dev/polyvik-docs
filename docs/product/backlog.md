@@ -25,7 +25,7 @@ rewriting the panel. If one of these shows up on a screen, that is a bug.
 
 | Feature | Switched off in | What is missing to turn it on |
 |---|---|---|
-| Online billing (Stripe) | `FREE_BETA` in [`plans.config.js`](../../polyvik-core/src/services/plans.config.js) | [Payments](#payments) |
+| Online billing (Stripe) | `FREE_BETA` in [`plans.config.js`](../../../polyvik-core/src/services/plans.config.js) | [Payments](#payments) |
 | Own keys not spending credits | `OWN_KEYS_SKIP_CREDITS` in the same file | owner says "production" |
 | Blog and Events | `brands.features.blog` / `.events`, per brand (Settings → Features) | [end-to-end check](#verifications) |
 | Video editor in the nav (`/lab/editor`) | `brands.features.video`, per brand | nothing; the flag turns on by itself with the brand's first video from `/video/create` |

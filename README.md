@@ -1,25 +1,24 @@
 # Polyvik workspace
 
-This repository is the hub for the Polyvik workspace. It holds the project documentation and the shared tools, and it explains how the pieces fit together. The code lives in two separate repositories, cloned next to this README:
+This repository is the hub for the Polyvik workspace. It holds the project documentation and the shared tools, and it explains how the pieces fit together. The code lives in two separate repositories. Clone the three side by side:
 
 ```
-polyvik/                 ← this repo (Hivek-Dev/polyvik-docs)
-  docs/                  all project documentation, in English (start at docs/README.md)
-  tools/qa/              manual QA scripts (production API with a tab's session, CDP screenshots, video runs)
-  polyvik-core/          → Hivek-Dev/polyvik-core   (ignored here; its own repo)
-  polyvik-panel/         → Hivek-Dev/polyvik-panel  (ignored here; its own repo)
+polyvik/                 plain folder (not a repo)
+  polyvik-docs/          ← this repo: docs/ (start at docs/README.md) and tools/qa/
+  polyvik-core/          → Hivek-Dev/polyvik-core
+  polyvik-panel/         → Hivek-Dev/polyvik-panel
 ```
 
 ## Setup
 
 ```bash
-git clone git@github.com:Hivek-Dev/polyvik-docs.git polyvik
-cd polyvik
+mkdir polyvik && cd polyvik
+git clone git@github.com:Hivek-Dev/polyvik-docs.git
 git clone git@github.com:Hivek-Dev/polyvik-core.git
 git clone git@github.com:Hivek-Dev/polyvik-panel.git
 ```
 
-The docs link into the code with relative paths (`../polyvik-core/...`), so keep this layout.
+The docs link into the code with relative paths (`../../../polyvik-core/...` from a doc), so keep the three repos as siblings.
 
 ## How the pieces relate
 

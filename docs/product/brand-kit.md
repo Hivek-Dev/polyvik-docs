@@ -4,10 +4,10 @@ The brand kit lives in **DNA → Brand** (`BrandIdentity.tsx`): the main kit
 (which *is* the brand's identity) and optional seasonal kits, each with an `@`
 handle and a validity window.
 
-Executable source: [`brandKit.services.js`](../../polyvik-core/src/services/brandKit.services.js)
+Executable source: [`brandKit.services.js`](../../../polyvik-core/src/services/brandKit.services.js)
 (`kitPrompt()`, `boardPrompt()`, `seasonPrompt()`, `buildKit()`), kit storage in
-[`brandKits.services.js`](../../polyvik-core/src/services/brandKits.services.js),
-and per-element generators in [`kitElements.services.js`](../../polyvik-core/src/services/kitElements.services.js).
+[`brandKits.services.js`](../../../polyvik-core/src/services/brandKits.services.js),
+and per-element generators in [`kitElements.services.js`](../../../polyvik-core/src/services/kitElements.services.js).
 Those functions are the brief; this page does not keep a copy of the prompts.
 
 Related: [Image engine](../image/image-engine.md) · [Plans and credits](plans-and-credits.md) · [Backlog](backlog.md#brand-kit).

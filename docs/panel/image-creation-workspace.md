@@ -1,7 +1,7 @@
 # Image creation workspace
 
-`/feed/create` ([`ImageCreate.tsx`](../../polyvik-panel/src/pages/ImageCreate.tsx),
-[`ImageCreate.css`](../../polyvik-panel/src/pages/ImageCreate.css)) is a focused
+`/feed/create` ([`ImageCreate.tsx`](../../../polyvik-panel/src/pages/ImageCreate.tsx),
+[`ImageCreate.css`](../../../polyvik-panel/src/pages/ImageCreate.css)) is a focused
 image workspace: an open stage above a floating composer, with every generation
 control attached to that composer.
 
@@ -42,11 +42,11 @@ control attached to that composer.
 
 - **Model, format, resolution:** the catalog, native aspect ratios and per-format
   resolutions come from `GET /api/canvas/models`.
-  [`imageCreateOptions`](../../polyvik-panel/src/lib/imageCreateOptions.ts) resolves
+  [`imageCreateOptions`](../../../polyvik-panel/src/lib/imageCreateOptions.ts) resolves
   incompatible choices together. A model without reference support cannot run while
   references are attached (an inline notice explains why).
 - **References:** picked from the brand's Library or Feed, or uploaded, through the
-  shared [`CreationReferencePicker`](../../polyvik-panel/src/components/CreationReferencePicker.tsx).
+  shared [`CreationReferencePicker`](../../../polyvik-panel/src/components/CreationReferencePicker.tsx).
   Up to six images, each with its reference role (`refUseOptions`).
 - **Brand DNA dialog:** toggle, palette, personality and a link to edit the brand
   identity. It maps to the backend's `useBrandStyle`; this screen does not redefine
