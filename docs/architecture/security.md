@@ -103,9 +103,10 @@ services, neither in headers nor in URLs, unless the user explicitly asks.
 ## Public forms and the client IP
 
 - The API sits behind Caddy on the same host. `server.js` sets `trust proxy: loopback`, so `req.ip` is the real client: Caddy overwrites `X-Forwarded-For`, and a client cannot spoof it. Checked in production on 27 Sep 2026.
-- Public, unauthenticated forms are rate limited per IP (`middlewares/rateLimit.middleware.js`, in memory, one API process), and they answer 429 with `Retry-After`:
+- Public, unauthenticated forms and the auth routes are rate limited per IP (`middlewares/rateLimit.middleware.js`, in memory, one API process), and they answer 429 with `Retry-After`:
   - event registration: 20 per 10 min per event, and 60 per hour overall;
-  - lead form: 5 per 10 min.
+  - lead form: 5 per 10 min;
+  - login: 20 per 15 min, and signup: 5 per hour.
 - Event slugs are unique across accounts, because the public page, registration and `.ics` look an event up by slug alone:
   - a generated slug gets a suffix;
   - a typed slug that is taken is rejected;

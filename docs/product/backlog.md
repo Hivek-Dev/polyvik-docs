@@ -169,8 +169,6 @@ Details: [video generation](../video/video-generation.md), [provider change](../
 
 ## Security and hardening
 
-- **Open** — Login and signup have no rate limit yet (the public forms do, since 27 Sep 2026).
-
 
 ## Verifications
 
