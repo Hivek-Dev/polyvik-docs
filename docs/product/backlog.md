@@ -169,6 +169,7 @@ Details: [video generation](../video/video-generation.md), [provider change](../
 
 ## Security and hardening
 
+Nothing open (last review 27 Sep 2026; see [security](../architecture/security.md)).
 
 ## Verifications
 
