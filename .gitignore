@@ -1,0 +1,5 @@
+# The code repos live here but are their own git repos.
+/polyvik-core/
+/polyvik-panel/
+.DS_Store
+node_modules/
