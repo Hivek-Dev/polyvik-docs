@@ -23,8 +23,10 @@ When you fix a bug, write down what used to happen:
 //  X piece square.)
 ```
 
-Code comments are mostly in Spanish; some newer ones are in English. Match the
-file you are in. No flourishes and no apologies.
+Code comments and docs are in English (since 27 Sep 2026). Product strings stay
+in Spanish on purpose: LLM prompts, messages the API returns to users and the
+Spanish UI values in `es.ts`. Published SQL migrations keep their original
+comments, because migrations are never edited. No flourishes and no apologies.
 
 ## Names
 
