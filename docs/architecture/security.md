@@ -99,3 +99,19 @@ services, neither in headers nor in URLs, unless the user explicitly asks.
       client images through `assertBrandAssetUrl`?
 - [ ] Does the public endpoint have a rate limit?
 - [ ] Did any sensitive data end up in a log or an error message?
+
+## Public forms and the client IP
+
+- The API sits behind Caddy on the same host. `server.js` sets `trust proxy: loopback`, so `req.ip` is the real client: Caddy overwrites `X-Forwarded-For`, and a client cannot spoof it. Checked in production on 27 Sep 2026.
+- Public, unauthenticated forms are rate limited per IP (`middlewares/rateLimit.middleware.js`, in memory, one API process), and they answer 429 with `Retry-After`:
+  - event registration: 20 per 10 min per event, and 60 per hour overall;
+  - lead form: 5 per 10 min.
+- Event slugs are unique across accounts, because the public page, registration and `.ics` look an event up by slug alone:
+  - a generated slug gets a suffix;
+  - a typed slug that is taken is rejected;
+  - publishing an event whose slug another published event uses moves it to a free slug (it wasn't public yet).
+- Event assets must belong to an event of the same brand.
+
+## Access model
+
+Access is per account (tenant), with roles owner, member and staff. There are no per-brand permissions: every user of an account can reach all of its brands, so checks are by tenant (plus brand ownership where a URL or id could point elsewhere). Per-brand checks inside one account are not a security boundary today.

@@ -72,12 +72,6 @@ An account can have several brands, with the switcher in the header and
 - **Open** — Name, email and password cannot be changed: no endpoint exists
   (`/api/me` only handles the avatar). The Account page shows them read-only
   and says so.
-- **Open** — On asset upload, `eventId` is not checked against the brand
-  (`assets.services.js`, `upload`): an asset can hang from another brand's
-  event within the same account.
-- **Open** — `PATCH /api/pieces/:id` (`pieces.services.js`, `edit`) checks the
-  tenant, not the brand. Within one account a piece of another brand can be
-  edited by id. Not a cross-account leak, but it breaks brand isolation.
 
 ## Campaigns and calendar
 
@@ -175,10 +169,8 @@ Details: [video generation](../video/video-generation.md), [provider change](../
 
 ## Security and hardening
 
-- **Open** — Public event registration
-  (`POST /api/public/events/:slug/register`) has no rate limit.
-- **Open** — Event slugs are unique per brand, not globally; the public lookup
-  without a brand parameter can match another brand's event with the same slug.
+- **Open** — Login and signup have no rate limit yet (the public forms do, since 27 Sep 2026).
+
 
 ## Verifications
 
