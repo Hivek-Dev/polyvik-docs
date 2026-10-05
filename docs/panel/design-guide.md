@@ -271,9 +271,15 @@ All in `ui.tsx` unless noted.
   that says what will happen; optional action on the right only when the empty
   state is the door to the flow. No dashed borders in new code (Home and Feed still
   use a dashed outline for their empty tiles).
-- **Loading:** `Spinner` (18 px + label). No skeletons outside the Canvas, except the
-  campaign "Try it" thumbnails, which shimmer (`.generation-shimmer-sweep`) only
-  during their real generation step.
+- **Loading:** never text. Images on their way are skeletons at their real shape
+  (`GallerySkeleton`, from the size the server stores for each asset) with the
+  `.generation-shimmer-sweep` sweep; the image fades in over the same box, so the
+  layout doesn't move. A list that hasn't arrived is a grid of skeletons
+  (`GallerySkeletonGrid`), labelled «loading» for screen readers only. A busy
+  button swaps its label for a spinning icon. The Feed follows this since
+  5 Oct 2026; other screens still show `Spinner` with a «Cargando» label and move
+  to the same rule as they're touched. The campaign "Try it" thumbnails shimmer
+  only during their real generation step.
 - **Banner** (`WarningBanner`): `border-warn/30 bg-warn/[0.06]`, at most one per
   screen, for a warning that changes how the whole screen reads.
 - **OccupancyBar**: 4 px bar, `amber` (`warn` when full), with the exact number
