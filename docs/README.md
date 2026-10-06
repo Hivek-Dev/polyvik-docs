@@ -24,6 +24,7 @@ These documents exist so that anyone, human or agent, can join the project knowi
 | Document | Read it when |
 |---|---|
 | [product/plans-and-credits.md](product/plans-and-credits.md) | When touching plans, limits or charges |
+| [product/publication-guides.md](product/publication-guides.md) | When touching brand directions or guided post types |
 | [product/brand-kit.md](product/brand-kit.md) | When touching the brand kit sheets |
 | [product/backlog.md](product/backlog.md) | When picking what's next (open items, decisions, risks) |
 | [new-features/README.md](new-features/README.md) | For new features to build, each with its own spec |

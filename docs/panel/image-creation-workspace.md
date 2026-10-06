@@ -21,8 +21,9 @@ control attached to that composer.
 - The active brand's name (and avatar) sits in the header; the welcome screen shows
   the brand's real palette as swatches. Brand DNA starts enabled and can be reviewed
   or turned off from the composer.
-- Three editable starters (product, scene/lifestyle, unexpected). They only fill the
-  prompt; clicking a starter never generates.
+- Six recommended publication guides, with **Ver todos** and **Crear libre**.
+  Dynamic fields separate confirmed facts from approved image copy; selecting a
+  guide never generates. See [publication guides](../product/publication-guides.md).
 - While generating, the stage shows a pending state. After generation the image
   replaces the welcome screen. Result actions:
   - **Saved** → link to the Feed (every generated image is stored there by the
@@ -49,8 +50,8 @@ control attached to that composer.
   shared [`CreationReferencePicker`](../../../polyvik-panel/src/components/CreationReferencePicker.tsx).
   Up to six images, each with its reference role (`refUseOptions`).
 - **Brand DNA dialog:** toggle, palette, personality and a link to edit the brand
-  identity. It maps to the backend's `useBrandStyle`; this screen does not redefine
-  brand identity.
+  identity. It also saves the primary and optional secondary publication direction
+  without changing the visual identity. The toggle maps to `useBrandStyle`.
 - **Art direction dialog:** a style guide from `GET /api/canvas/skills` and an
   optional instruction.
 - ⌘/Ctrl + Enter generates.
@@ -59,7 +60,7 @@ control attached to that composer.
 
 One request to `POST /api/canvas/generate` with brand, prompt, provider, aspect ratio,
 image size, references (`url` + `use`), `useBrandStyle`, `skillId` and the extra
-instruction as `contextTexts`. Submission is locked while pending and is **never
+instruction as `contextTexts`, plus optional structured `publication` facts/copy. Submission is locked while pending and is **never
 retried automatically** (a retry could charge a second image). On failure the prompt
 and all selections are kept and the error is shown above the composer, in the
 dock (this page still uses inline errors rather than `notify()`).
