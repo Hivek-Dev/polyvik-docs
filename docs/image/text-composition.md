@@ -1,7 +1,6 @@
 # Text composition in images
 
-How the words on a campaign image are designed, measured and drawn. No database
-migration is involved. Fonts: [Real typography](real-typography.md). Audience,
+How the words on a campaign image are designed, measured and drawn. Fonts: [Real typography](real-typography.md). Audience,
 language and the editorial finish: [Editorial context](editorial-context.md).
 Overall pipeline: [Image engine](image-engine.md).
 
@@ -41,17 +40,35 @@ like a collage: scene light never touched the letters.
    may change; OCR may join, split or reorder approved blocks. Each approved phrase
    is consumed once, so duplicates and extra words still fail. The reported coffee
    promotion with two approved paragraphs merged by OCR has a regression test.
-   Letters, accents and punctuation may not change. A missing logo or a
+   Typographic ellipses and invisible word joiners normalize; changed words,
+   accents, numbers and other punctuation still produce findings. A missing logo or a
    covered face also fails.
 4. Two attempts. If both fail (`integrated_text_mismatch`), the piece is painted
    with the `composited` path. A piece with a typo is never delivered.
 5. `imagePlan.textChecks` records each read; `imagePlan.composition.execution` and
    `imagePlan.typography.execution` say `integrated`, `composited` or `provider`.
 
-Individual image creation returns `integrated_text_mismatch` with allowlisted
-structured issues for the recovery card. Its public message gives a next step;
-the full technical diagnostic remains on the internal error. No automatic paid
-retry is added to this flow, and genuine copy/logo mismatches are still rejected.
+### Interactive guided creation
+
+`/feed/create` sends `qualityReview: "v1"` with its publication. Only clients that
+display review metadata opt into `reviewMode: "assist"`; legacy callers and
+campaigns retain their strict contract. A copy disagreement is confirmed once on
+a clearer proof (up to 2048 px, JPEG quality 96). If it clears, no image edit runs.
+
+With Polyvik's OpenAI image key, a confirmed editorial issue gets **one** edit of
+the actual candidate, keeping the scene and approved copy in the prompt. Only a
+verified correction replaces the original. This is inside the existing image
+credit. BYOK never gets an extra image-provider call for this repair; other
+providers currently skip automatic repair too. Text-key review calls still use
+the normal account text-key routing.
+
+If copy remains uncertain, or the reader is unavailable, the original image is
+delivered as `review.status: "needs_review"`, with allowlisted findings. It is
+available to inspect and edit; no automatic publication or approval occurs. The
+warning persists as `brand_assets.generation_review` (migration 085), and appears
+in Create images and the Feed tile/dialog. Successful repair returns `corrected`.
+Logo checks remain blocking, and campaigns still use their composited fallback.
+Missing files, provider failures and quota errors keep the recovery-card path.
 
 Under the production `lite` profile the editorial finish is skipped for integrated
 pieces; in the composited path the finish can still review a mobile proof over the

@@ -70,6 +70,18 @@ Provider, credit and connection failures link to AI Keys, Plan or Feed respectiv
 Retry is always explicit and states its cost; reviewing never generates an image.
 Download and catalog errors remain in the dock.
 
+Guided creation also sends `qualityReview: "v1"`, signaling support for nonblocking
+quality metadata. The server confirms an OCR disagreement and may perform one
+same-candidate text edit using Polyvik's OpenAI key within the existing image
+credit. It never adds an image edit on a customer's own key. See
+[interactive text quality](../image/text-composition.md#interactive-guided-creation).
+Unresolved copy comes back with the image as `review.status: "needs_review"`;
+`ImageQualityNote` explains it without treating creation as failed. **Review text**
+focuses the approved copy and attaches the displayed candidate as a base reference
+for the user's next explicit generation. Review metadata is parsed and allowlisted,
+and persists in Feed tiles/dialogs after navigation. A verified internal repair
+shows a short `corrected` note. The browser itself never retries the request.
+
 `npm run test:recovery` exercises structured review failures, guided/free edit focus,
 explicit retry payloads, previous-result preservation, provider/credit/network
 actions and desktop/mobile accessibility with mocked APIs and no paid generations.
