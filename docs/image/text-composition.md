@@ -38,12 +38,20 @@ like a collage: scene light never touched the letters.
    logo is attached on its own and must be reproduced exactly.
 3. Before saving, Haiku reads the image (`checkIntegratedText`, log kind
    `image_text_check`) and compares it with the approved text. Case and line breaks
-   may change; letters, accents and punctuation may not. A missing logo or a
+   may change; OCR may join, split or reorder approved blocks. Each approved phrase
+   is consumed once, so duplicates and extra words still fail. The reported coffee
+   promotion with two approved paragraphs merged by OCR has a regression test.
+   Letters, accents and punctuation may not change. A missing logo or a
    covered face also fails.
 4. Two attempts. If both fail (`integrated_text_mismatch`), the piece is painted
    with the `composited` path. A piece with a typo is never delivered.
 5. `imagePlan.textChecks` records each read; `imagePlan.composition.execution` and
    `imagePlan.typography.execution` say `integrated`, `composited` or `provider`.
+
+Individual image creation returns `integrated_text_mismatch` with allowlisted
+structured issues for the recovery card. Its public message gives a next step;
+the full technical diagnostic remains on the internal error. No automatic paid
+retry is added to this flow, and genuine copy/logo mismatches are still rejected.
 
 Under the production `lite` profile the editorial finish is skipped for integrated
 pieces; in the composited path the finish can still review a mobile proof over the

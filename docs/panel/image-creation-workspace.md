@@ -61,9 +61,18 @@ control attached to that composer.
 One request to `POST /api/canvas/generate` with brand, prompt, provider, aspect ratio,
 image size, references (`url` + `use`), `useBrandStyle`, `skillId` and the extra
 instruction as `contextTexts`, plus optional structured `publication` facts/copy. Submission is locked while pending and is **never
-retried automatically** (a retry could charge a second image). On failure the prompt
-and all selections are kept and the error is shown above the composer, in the
-dock (this page still uses inline errors rather than `notify()`).
+retried automatically** (a retry could charge a second image). On generation failure,
+the stage shows the shared `ImageRecoveryCard`, while retaining the prompt, approved
+copy, selections and previous successful image. **Review text** focuses the actual
+copy field (or the free prompt); logo and composition failures open their controls.
+Detection details are expandable, rather than an OCR dump above the composer.
+Provider, credit and connection failures link to AI Keys, Plan or Feed respectively.
+Retry is always explicit and states its cost; reviewing never generates an image.
+Download and catalog errors remain in the dock.
+
+`npm run test:recovery` exercises structured review failures, guided/free edit focus,
+explicit retry payloads, previous-result preservation, provider/credit/network
+actions and desktop/mobile accessibility with mocked APIs and no paid generations.
 
 ## Validation (snapshot at launch)
 
