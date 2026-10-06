@@ -43,21 +43,28 @@ like a collage: scene light never touched the letters.
    Typographic ellipses and invisible word joiners normalize; changed words,
    accents, numbers and other punctuation still produce findings. A missing logo or a
    covered face also fails.
-4. Two attempts. If both fail (`integrated_text_mismatch`), the piece is painted
-   with the `composited` path. A piece with a typo is never delivered.
+4. Review-aware clients and worker drafts confirm a copy disagreement on a clearer
+   proof and may repair the same candidate once. An unresolved image is delivered
+   with a visible review warning, never automatically approved or published. Legacy
+   clients retain two integrated attempts followed by the `composited` fallback.
 5. `imagePlan.textChecks` records each read; `imagePlan.composition.execution` and
    `imagePlan.typography.execution` say `integrated`, `composited` or `provider`.
 
 ### Interactive guided creation
 
-`/feed/create` sends `qualityReview: "v1"` with its publication. Only clients that
-display review metadata opt into `reviewMode: "assist"`; legacy callers and
-campaigns retain their strict contract. A copy disagreement is confirmed once on
+`/feed/create`, onboarding preview, Brand image studio and campaign previews send
+`qualityReview: "v1"`. Clients displaying review metadata opt into
+`reviewMode: "assist"`; the campaign worker also uses it for pending-approval drafts.
+Legacy callers retain their strict contract. A copy disagreement is confirmed once on
 a clearer proof (up to 2048 px, JPEG quality 96). If it clears, no image edit runs.
 
 With Polyvik's OpenAI image key, a confirmed editorial issue gets **one** edit of
 the actual candidate, keeping the scene and approved copy in the prompt. Only a
-verified correction replaces the original. This is inside the existing image
+verified correction replaces the original. Integrated text layers retain their
+approved copy for repair. For protected logos the edit receives the scene before
+logo insertion, then the original file is placed again and verified. A failed edit
+or newly broken logo retains the original candidate and its original logo audit.
+This is inside the existing image
 credit. BYOK never gets an extra image-provider call for this repair; other
 providers currently skip automatic repair too. Text-key review calls still use
 the normal account text-key routing.
@@ -67,7 +74,12 @@ delivered as `review.status: "needs_review"`, with allowlisted findings. It is
 available to inspect and edit; no automatic publication or approval occurs. The
 warning persists as `brand_assets.generation_review` (migration 085), and appears
 in Create images and the Feed tile/dialog. Successful repair returns `corrected`.
-Logo checks remain blocking, and campaigns still use their composited fallback.
+The same warning appears in the first-piece editor, Brand modal, campaign preview,
+calendar viewer and Piece studio. Onboarding persists it in the signed preview
+receipt and later in the saved asset; campaigns persist it in `imagePlan.review`
+(or legacy `previewReview`). Client edits cannot forge or clear server-owned review
+metadata. Replacing an image adopts its owned asset review, avoiding stale warnings.
+Logo checks remain blocking.
 Missing files, provider failures and quota errors keep the recovery-card path.
 
 Under the production `lite` profile the editorial finish is skipped for integrated
@@ -151,7 +163,8 @@ against scene pixels or transparency: that needs visual review.
 - `imageDirector.services.js`: designs in one call. It never uses a Molde image
   or an extraction's original piece as a source of facts.
 - `generation.services.js`: picks the Molde once, decides integrated vs composited,
-  runs the two integrated attempts, and passes the final composition to the engine.
+  passes one candidate to the shared quality engine for updated callers, preserves
+  the two-attempt fallback for legacy callers, and passes the final composition to the engine.
   The Molde's turn is counted only after a successful, non-preview generation.
 - `pieceBrief.services.js`: reserves copy-free zones with real typography; without
   a chosen font lets the model draw the blocks. The panel's chosen font rules every

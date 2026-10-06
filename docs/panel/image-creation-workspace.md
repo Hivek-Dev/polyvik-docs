@@ -94,3 +94,16 @@ roles, incompatible-model blocking, art direction, the brand toggle, result disp
 base-image refinement and draft preservation after a failed request, plus a
 390 × 844 mobile layout with no horizontal overflow. These numbers are historical;
 run the current test suite rather than relying on them.
+
+
+## Shared image review (6 October 2026)
+
+Onboarding first images, Brand image studio and campaign previews opt into the
+same versioned quality contract as Create images. A successful image with
+`needs_review` stays visible and editable; Review text focuses its approved copy
+without making another generation request. Brand/onboarding refinements use the
+signed current candidate. Campaign review opens Piece studio; calendar viewers
+show the saved warning too. `corrected` explains the internal edit without an
+extra plan image. The onboarding local draft retains review on reload, and saved
+assets/campaign plans retain it server-side. Provider, quota and connectivity
+failures remain actionable errors; logo protection is never relaxed by copy review.
