@@ -204,3 +204,15 @@ campaigns also request a copy-free scene. Protected logos explicitly stay out of
 the model drawing. If the essential copy itself cannot fit, validation stops
 before reference uploads or a paid prediction; it never silently drops words.
 This strengthens instructions, but provider compliance still needs review.
+
+Real UI validation on 6 October 2026: a Brand studio image preserved its original
+logo file and three approved copy fields. A Seedream infographic first returned
+`needs_review` with missing and invented copy; after the prompt-priority fix, an
+explicit refinement using the same candidate and approved strings returned the
+correct title and all three numbered blocks without a review finding. Both
+outputs were saved to Feed. This is representative validation of two providers,
+not a visual test of every recipe. Automated verification: 589 core tests passed,
+12 integration tests skipped, 52 panel tests passed; browser recovery checks cover
+Create images, onboarding reload, Brand refinement, campaign review and published
+piece protection. Provider variability remains possible; unresolved copy stays
+editable with its warning instead of being discarded.
