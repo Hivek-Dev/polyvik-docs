@@ -192,3 +192,15 @@ against scene pixels or transparency: that needs visual review.
 - Tests need a Node that supports `--experimental-test-module-mocks`.
 - Mocked cases do not prove visual quality; validate by regenerating real pieces.
 - Deploy core before panel. See [deployment](../architecture/deployment.md).
+
+### Bounded Seedream prompts
+
+Seedream's 4000-character limit previously truncated the tail of long brand
+context, which could remove a guided publication's exact copy and recipe. The
+engine now places an explicit approved-copy contract first, bounds the reference
+captions and then fits optional context into the remaining space. Guided Canvas
+recipes precede brand context too. Empty copy forbids editorial text; composited
+campaigns also request a copy-free scene. Protected logos explicitly stay out of
+the model drawing. If the essential copy itself cannot fit, validation stops
+before reference uploads or a paid prediction; it never silently drops words.
+This strengthens instructions, but provider compliance still needs review.
