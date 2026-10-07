@@ -72,6 +72,40 @@ The campaign recipe keeps its settings; identity and model images are read live.
 `imagePolicy.services.js` is still used by the blog — it is not a dead copy of
 `pieceBrief.services.js`, which builds the piece contract.
 
+## The reference system: one owner per dimension
+
+Since 7 Oct 2026 every entry point (Create images, tools, campaign pieces, the kit
+studio) follows the same ownership rules. Two layers of tests freeze them:
+`polyvik-core/test/referenceSystem.test.js` (what each provider receives, image by
+image) and `test/canvasReferences.test.js` (what Create images decides).
+
+| Dimension | Owner | Rule |
+|---|---|---|
+| Look / finish | A **model image** (one, rotating) — or, without one, the **free-style bank** | Never both. With a model image the board and the bank stay home (`anchored`) |
+| Layout | The Molde | Look references lend finish, never composition |
+| Typography | The brand's typeface (`palette.fonts[0]`) | Sent with text-bearing Create images pieces; every look caption yields to it |
+| Colors | The kit palette (or the seasonal one) | Once per prompt |
+| Logo | The brand logo | One: an explicit `logo` reference replaces the automatic one |
+| Content | What the user attaches | Outranks the look |
+
+- **Free-style bank** (`config/references.config.js`): up to 12 images
+  (`MAX_STYLE_BANK`), website captures included; each generation takes 2
+  (`STYLE_REFS_PER_IMAGE`) via `pickAmbientRefs` — random, or deterministic with
+  `lookRotation`. Campaign pieces pick their own single free-style image and never
+  send the rest (`profileStyleRefs: false`).
+- **Model images in Create images:** one is attached as the anchor only when a slot
+  is free; it never displaces the user's references. Tools pass `lookAnchor: false`:
+  a finished designed piece as a look would turn a product photo into a poster.
+- **The cap** (`MAX_REFERENCES`, 6 explicit references) cuts by priority after
+  ordering — anchor, base, layout, character, product, place, logo, content,
+  style… — never by arrival order.
+- **Instructions vs. rejections:** a piece's own image instructions reach the
+  designer and the engine as the client's instructions, not as "the client rejected
+  the previous version".
+- The anchor's caption travels once, attached to its image; the piece brief no
+  longer repeats it.
+- The kit studio drops the board when model images own the look.
+
 ## Reference roles
 
 The core defines `REFERENCE_USES` in `imageGenerator.services.js`; the panel
