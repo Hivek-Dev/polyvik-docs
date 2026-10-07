@@ -128,3 +128,46 @@ fields. `npm run test:publications` uses an isolated browser and mocked API resp
 (no real generation costs) to verify dynamic fields, reviewed AI text, free creation,
 saved direction, required wizard selection, 24 searchable sectors, twelve content-line choices,
 80 browsable guides, per-line filters, and desktop/mobile accessibility.
+
+## Image copy aligned with the selected mold (6 October 2026)
+
+The copy assistant now receives the selected recipe, authenticated brand voice,
+format, catalog mold and art direction. Owned layout references are included as
+visual evidence after tenant/brand/storage validation. Mold metadata is resolved
+from the server catalog, never accepted as client-authored instructions.
+
+Each recipe copy role has a short image-oriented recommendation (not the old
+600-character drafting target). Mold capacity adjusts these recommendations;
+all semantic roles of the publication remain available. AI proposals use plain
+text and are validated against these limits. One bounded rewrite can recover an
+oversize proposal within the same assist. Approved human copy is never truncated
+or silently rewritten to fit a mold.
+
+Changing a recipe, mold, format, factual input or art direction preserves edited
+copy and offers **Adaptar textos con IA**. An advisory context stamp accompanies
+the panel draft across Texto/Molde tabs; it grants no server authority. Late AI
+responses cannot overwrite a newer piece. Create images now has a catalog mold
+picker and carries its ID through generation and local history. The server
+renders the trusted diagram and gives it to the image engine as geometry only.
+Unsupported formats and reference capacity are explained before generation.
+
+Paired Markdown bold/code markers are removed from publication copy before both
+rendering and verification, preserving wording, accents, trademark symbols and
+numbers. Field/role labels such as Problema and Solución are instructions, not
+additional printable copy. OCR is explicitly instructed to classify a logo's
+wordmark and embedded tagline as object text. Real missing words, changed figures,
+misspellings and unapproved editorial text still receive review findings.
+
+Validation: the full core suite passed (594 tests, 12 skipped), with an additional
+regression covering the reported Markdown/OCR mismatch; 53 panel unit tests;
+isolated browser coverage for changing molds, aligned assist and generation
+payloads, onboarding tab persistence, copy normalization, desktop/mobile
+accessibility, and existing recovery flows. These tests mock paid providers.
+
+Authenticated live QA also completed: one copy assist produced three clean blocks
+of 43/65/21 characters against a 53/82/28-character mold recommendation. A single
+GPT Image 2.5 generation rendered the three blocks and returned a usable image
+without review warnings; the UI showed the selected publication and mold. The
+result was saved in Feed. This is one successful sample, not a claim that every
+future provider output will pass verification. Core deploy: `3fca186`; panel:
+`7e6abc8`.
