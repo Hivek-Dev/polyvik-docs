@@ -1,191 +1,94 @@
-# Brand kit
+# Brand identity and kits
 
-The brand kit lives in **DNA → Brand** (`BrandIdentity.tsx`): the main kit
-(which *is* the brand's identity) and optional seasonal kits, each with an `@`
-handle and a validity window.
+DNA → Brand (`BrandIdentity.tsx`, the «Marca» tab) holds what every image
+inherits: logo, palette, typeface, model images and visual direction. The main
+kit *is* that identity; seasonal kits only change colours and motifs for a few
+dates.
 
-Executable source: [`brandKit.services.js`](../../../polyvik-core/src/services/brandKit.services.js)
-(`kitPrompt()`, `boardPrompt()`, `seasonPrompt()`, `buildKit()`), kit storage in
-[`brandKits.services.js`](../../../polyvik-core/src/services/brandKits.services.js),
-and per-element generators in [`kitElements.services.js`](../../../polyvik-core/src/services/kitElements.services.js).
+Executable source: kit storage in [`brandKits.services.js`](../../../polyvik-core/src/services/brandKits.services.js),
+per-element generators in [`kitElements.services.js`](../../../polyvik-core/src/services/kitElements.services.js),
+palette from an image in [`kitPalette.services.js`](../../../polyvik-core/src/services/kitPalette.services.js)
+(`paletteFromImage`) and the model-image studio in
+[`brandImageStudio.services.js`](../../../polyvik-core/src/services/brandImageStudio.services.js).
 Those functions are the brief; this page does not keep a copy of the prompts.
 
 Related: [Image engine](../image/image-engine.md) · [Plans and credits](plans-and-credits.md) · [Backlog](backlog.md#brand-kit).
 
-## What a kit delivers
+## What it holds
 
-Originals, visual decisions and application examples. An attractive image is
-not a functional identity: decisions must be repeatable and files usable
-without rebuilding them from a thumbnail.
+| Element | Stored in | What it governs |
+|---|---|---|
+| Logo | `brand_assets` kind `logo`, `brand_profiles.logo_mode` | The one logo of every piece. Travels as a file |
+| Palette | `palette.colors` (5 by role, 6 at most) | The colours of every piece, once per prompt |
+| Typeface | `palette.fonts[0]`, from the known font catalog | The text drawn on pieces |
+| Model images | `brand_assets` kind `model` (up to `MAX_MODELS = 4`) | The look: finish, light, medium. One rotates per piece |
+| Visual direction | `brand_profiles.visual_direction` | Mood, composition, graphic resources, what to avoid. Read by the image director and the piece finisher; not by campaign ideas, blog or copy |
+| Rules | `brand_profiles.guidelines` | Managed in DNA → Voice; shown here read-only |
 
-What 2026 brand guides agree on: logo system, palette (light and dark), type
-with hierarchy, image direction, a reusable graphic system, applications and
-usage rules. New this year: accessibility (contrast), social templates and
-rules for AI-generated content. **Voice is not in the kit**: it lives in
-DNA → Voice.
+**Voice is not in the kit**: it lives in DNA → Voice. Without a model image a
+piece has no look reference; palette, typeface and visual direction carry the
+brand.
 
-## The four sheets
+## «Crea tu imagen modelo»
 
-All 16:9, same model and quality (`MAX_SHEETS = 4`).
+The brand's first image, the same one onboarding makes, available at any time
+for a saved brand. Routes under `/api/brands/:id/image-studio`: `GET` (context),
+`POST` (generate, 1 image credit), `POST …/materials` and `POST …/model`.
 
-| # | Sheet | Shows | References it receives |
-|---|---|---|---|
-| 1 | **Identity** | Logo, palette with roles, type, art direction, finish | logo + look (free style) images |
-| 2 | **Graphic system** | Text blocks/panels, borders, pattern, dividers, stamps | sheet 1 + logo |
-| 3 | **Icons and imagery** | 12–16 icons with one stroke, illustration style, photo treatment | sheets 1–2 + logo |
-| 4 | **Applications** | The logo in use: post, story, banner, card, product or packaging depending on the business | sheets 1–3 + logo |
+- **Website captures travel only here.** The captures taken at onboarding are
+  stored as `brand_assets` kind `style_ref` (up to `MAX_STYLE_BANK = 12`) and
+  reach only the brand's first image (`generateImage` option `siteLooks`,
+  `STYLE_REFS_PER_IMAGE = 2` at a time). Every other image takes its look from
+  the model images.
+- **Existing model images never travel here.** A model made from a model is the
+  copy of a copy.
+- The customer iterates until the image is right and keeps it as a model image.
+  `POST …/model` only accepts a signed receipt of a result generated for that
+  brand and draft; the client cannot name a URL.
+- Onboarding saves its approved first image as kind `model` directly.
+- The Canvas library checkmark also means "use as model image": it promotes the
+  file to kind `model` (`POST /api/assets/:id/promote`).
 
-### The chain is what keeps it coherent
+## Generating each element
 
-- **A chain, not four separate briefs.** Each sheet receives the previous ones
-  as images with the `board` role: they govern finish, palette, geometry,
-  stroke and elements already drawn; they are neither traced nor redesigned.
-  The logo comes after them, with its exact index. The model sees them; we do
-  not describe them. A missing earlier sheet blocks generation ("generate
-  sheet N first").
-- **Its own header per sheet** (`GRAPHIC SYSTEM BOARD`, `ICONS AND IMAGERY
-  BOARD`, `APPLICATIONS BOARD`) over the same shared blocks (language, logo,
-  palette, typeface, brand constraints, brand context, season, client note).
-- **No VISUAL REFERENCES from sheet 2 on.** Look images only enter sheet 1;
-  after that the direction is already in the sheets, and two authorities would
-  fight.
-- **Hard data always travels literally**: hex codes, font name, logo as a file.
-  Never trust the model to "read" them from sheet 1.
-- **Sheet 1 rules.** Regenerating it marks sheets 2–4 `stale` and the panel
-  offers "Regenerate the following ones". They are not deleted.
-- **One or all.** A button per sheet and "Generate full kit", which runs the
-  chain in order. If sheet 3 fails, 1 and 2 remain and the user is told.
-- **Cost:** each sheet charges 1 image credit (`credit("image")` on
-  `POST /api/brands/:id/kits/:kitId/sheet`); a full kit is 4 images. See
-  [Plans and credits](plans-and-credits.md).
-
-## Inputs
-
-| Material | Rule |
-|---|---|
-| Official logo | Complete file. Symbol and lettering stay together. Only explicitly authorised files and uses count as variants |
-| Palette and font | Stored data is the authority; never extract it from the generated sheet |
-| Brand context | Activity and needed uses; do not invent features, certifications or commercial claims |
-| References | Optional and relevant. Say what to take: clarity, composition, material or finish |
-| Guidelines | Full, editable rules. Separate permanent constraints from changes asked for one generation |
-| Applications | Explicit user selection, with format and approved copy. Generate only the chosen ones |
-
-**Nothing new is mandatory.** Panels, icons, pattern and applications are
-OUTPUTS, not uploads. The one input that helps and already exists is the brand
-description in DNA; if it is empty, sheet 4 comes out generic (worth warning in
-the modal).
-
-### Generating each element from its modal
-
-So that someone with only a name and a description can build the kit
+So that someone with only a name and a description can build an identity
 (`POST /api/brands/:id/kits/:kitId/generate/:element`):
 
-| Element | Button | How | Credits |
-|---|---|---|---|
-| Logo | **Generate logo** | gpt-image-2.5 with name, description, palette if any and style words; transparent PNG; two options, the user picks one | 2 images |
-| Palette | **Propose palette** | LLM with description + logo + look; 5 colours with roles | 1 assist |
-| Typeface | **Suggest typeface** | LLM picks ONLY from the known font catalog and explains in one line | 1 assist |
-| Look (free style) | **Generate reference** | gpt-image-2.5 with description + palette; one mood/finish image | 1 image |
-| Guidelines | **Propose guidelines** | LLM writes 4–6 from everything else; the user edits them | 1 assist |
+| Element | How | Credits |
+|---|---|---|
+| `logo` | gpt-image-2.5 with name, description, palette and typeface if any; transparent PNG; two options, the user picks one | 2 images |
+| `palette` | LLM with description, logo and up to two website captures; 5 colours with roles | 1 assist |
+| `font` | LLM picks ONLY from the known font catalog and explains in one line. Main kit only | 1 assist |
+| `rules` | LLM writes 4–6 guidelines from everything else; the user edits them. Main kit only | 1 assist |
 
-Rule: generated material is stored like uploaded material; afterwards the
-system does not care where it came from. Logo proposals are stored as brand
-assets of kind `other` named "Logo propuesto N".
+The palette can also be read from any uploaded image or Library file
+(`POST /api/brands/:id/kits/:kitId/palette`, 1 assist).
 
-## The provider request
-
-- Provider OpenAI, forced for the kit. Tier `precise` by default:
-  `gpt-image-2.5-sunburst` at quality `xhigh`; the fast tier uses
-  `gpt-image-2.5-flare` at `high` (`imageModels.config.js`). If the account has
-  no 2.5 access it falls back to `OPENAI_IMAGE_FALLBACK_MODEL`
-  (`gpt-image-2-2026-04-21`) and the sheet records which model was used.
-- Requested at 2048×1152 (multiples of 16; normalisation may yield 2049×1152).
-  If the provider returns another ratio, it is kept without cropping; the
-  response reports the real dimensions.
-- `bare: true`: no piece-generator suffix.
-- `strictReferences: true`: if an attachment fails while preparing the request,
-  it aborts before spending, with a specific message.
-- The GPT Image 2 family (2.5 included) uses high input fidelity implicitly;
-  `input_fidelity` is not sent.
-- Attachment order: main → logo and looks; re-edit → base sheet and original
-  logo if present. Prompt indices follow that order.
-- Text inside attachments is reference, not instructions.
-
-### What counts as identity
-
-Original logo, explicit palette, selected font, and all active guidelines with
-their full content and scope (not only the title). References contribute
-rhythm, density, geometry, contrast and finish, without copying their layout,
-subjects, text or fonts.
-
-The business description travels in full as context, not as text to print.
-Rule titles, palette codes and type alphabets guide the design and are only
-printed when asked. The client note changes the treatment without silently
-replacing the identity.
-
-### Freedom of composition
-
-Blocks describe inputs, not sections or positions. Only provided categories
-appear; no slots are reserved for missing ones. Mandatory inventories (icons,
-patterns, panels, logo variants, square and vertical applications), fixed
-columns, giant logo and section numbering were all removed. Art direction comes
-from the relationships between brand data.
-
-### Indivisible identity
-
-Logo and lettering keep position, proportion and spacing. Symbols and names are
-not extracted as type specimens. Re-edits drop separated uses even if they
-appear on the base sheet. The shared logo-reference label enforces the same
-rule in the Canvas.
-
-### Per-generation brief
-
-`POST /api/brands/:id/kits/:kitId/sheet` accepts an optional
-`{ instruction: string }` of up to 2000 characters. It is added to the kit's
-stored instruction without modifying its data, and applies to the main kit and
-to seasons. The panel keeps the draft per brand and kit while the screen is
-mounted; it does not persist across sessions.
+Generated material is stored like uploaded material; afterwards the system does
+not care where it came from. Logo proposals are stored as brand assets of kind
+`other` named "Logo propuesto N".
 
 ## Seasonal kits
 
-A kit based on the main one re-edits the sheet **with the same number**: its
-graphic system comes from the main kit's graphic system, not from its own
-sheet 1. All four carry the same change (palette, motifs, brief) over material
-that was already coherent, and each can be redone alone without spending the
-other three. If the main kit lacks that sheet, the season chains its own.
+A seasonal kit (`brand_kits`) owns only its **name, `@` handle, dates, colours
+and motifs**. That is all `campaignPlan.services.js` freezes into the campaign as
+`plan.season`. Logo, typeface, rules, visual direction and model images are the
+brand's and are shared by every kit. Outside its dates a campaign falls back to
+the main kit.
 
-Regenerating the main kit does not attach the previous sheet: keeping
-structure only applies to kits explicitly based on it.
+## Retired on 7 Oct 2026
 
-When pieces are generated, a season contributes only its **name, colours and
-motifs** (`campaignPlan.services.js`); its typography and guidelines do not
-travel yet (see [backlog](backlog.md#brand-kit)).
-
-## Sheets and pieces
-
-Without an uploaded board of its own, a piece receives the kit's sheet 2 — from
-the campaign's frozen kit if any, otherwise the ruling kit — or sheet 1 if
-there is no sheet 2 (`kitBoardForPieces`, used in `generation.services.js`).
+- **Kit sheets** («Presentación del kit», four 16:9 images) and their bridge to
+  pieces are gone. The `brand_kit_sheets` table stays for old rows.
+- **The brand board** (`palette.board_url`, removed by migration 090) never
+  reaches generation; old board files stay in the Library.
+- **Free style** («Estilo libre») is no longer a look source, and kits no longer
+  generate a "look" element.
 
 ## Honest limits
 
-- **Sheets are images, not editable files.** Sheet 3's icons are a visual
-  reference for coherent pieces, not a downloadable SVG set. The only usable
-  files are the logo (transparent PNG) and the look image.
-- **The model receives the font name, not the file.** The generated specimen
-  does not certify its glyphs.
+- **The image model receives the font name, not the file.** The original font
+  files are used where text is composed ([Real typography](../image/real-typography.md)).
 - **The logo travels as an image.** Keeping it exact is an instruction, not a
-  pixel-equality guarantee. OpenAI's [image generation docs](https://developers.openai.com/api/docs/guides/image-generation#limitations)
-  acknowledge limits on text, consistency and placement; exactness requires
-  composition and checking.
-- **An embedded raster is never labelled as an editable vector.** Approved new
-  resources are exported as their own files, not as crops of the sheet.
+  pixel-equality guarantee.
 - Tests with a mocked provider verify the request contract, not visual quality.
-
-## Acceptance criterion
-
-Two applications must be recognisable as the same brand even when format and
-layout change, and every resource announced in the delivery must exist and be
-usable on its own. What is still missing to meet it (versioning and approval,
-export package, result review, fixing one application alone, per-kit logo and
-look) is tracked in the [backlog](backlog.md#brand-kit).

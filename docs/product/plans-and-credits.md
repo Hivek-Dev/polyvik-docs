@@ -105,12 +105,13 @@ proposals does not refund it.
 - Request changes on a piece (reject), or create a manual piece without copy.
 
 **Image** (monthly pool): each image generated, extended or retouched in the
-Canvas, the image creation page or the Feed/piece editor; each kit sheet; the
-kit logo (2, because it proposes two options) and look; each character image;
-an event cover; blog images.
+Canvas, the image creation page or the Feed/piece editor; each try of the
+brand's first image (onboarding or «Crea tu imagen modelo»); the kit logo (2,
+because it proposes two options); each character image; an event cover; blog
+images.
 
-**AI assist** (monthly pool): profile assistant, board analysis, kit palette /
-font / rules, template extraction and "Use as template", describing materials,
+**AI assist** (monthly pool): profile assistant, kit palette (proposed or read
+from an image) / font / rules, template extraction and "Use as template", describing materials,
 proposing sections, learning from an edit, Canvas directives and their names,
 character bible, blog topics and articles.
 
@@ -191,8 +192,8 @@ Every charge point checks the balance **before** calling the AI.
 | Generate a piece (first time, up to 12) | nothing, included | `chargeGeneration` | — |
 | Regenerate, piece 13+, request changes, manual piece without copy | 1 iteration (month pool, then extras) | `chargeGeneration` → iteration pool (same transaction that locks the campaign) | 402 `quota_iterations` |
 | Regenerate proposals | free up to 3, then 1 iteration | `chargeProposals` | same |
-| Canvas / image creation / retouch, kit sheets and logo/look, event cover, blog images, characters | 1 image each (kit logo: 2) | `credit("image")` (`middlewares/credit.middleware.js`), `withCredit` / `chargeCredit` in services | 402 `quota_credits` (`kind: image`) |
-| Profile assistant, board, kit palette/font/rules, templates, describe, sections, learn, directives, blog topics/articles, character bible | 1 assist | `credit("assist")` or `withCredit` | 402 `quota_credits` (`kind: assist`) |
+| Canvas / image creation / retouch, first brand image, kit logo, event cover, blog images, characters | 1 image each (kit logo: 2) | `credit("image")` (`middlewares/credit.middleware.js`), `withCredit` / `chargeCredit` in services | 402 `quota_credits` (`kind: image`) |
+| Profile assistant, kit palette/font/rules, templates, describe, sections, learn, directives, blog topics/articles, character bible | 1 assist | `credit("assist")` or `withCredit` | 402 `quota_credits` (`kind: assist`) |
 | Video | `ceil(cost / 0.39)` video credits | `chargeVideo` → `chargeCredit("video")` | 402 `quota_credits` (`kind: video`) |
 | New brand beyond the plan | — | `assertBrandAllowed` | 402 `quota_brands` |
 

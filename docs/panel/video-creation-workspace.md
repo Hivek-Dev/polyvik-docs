@@ -42,7 +42,7 @@ pending.
 
 ## Brand direction and references
 
-- Brand DNA sends the palette, description, personality and active global rules as
+- Brand DNA sends the palette, description, tone and active global rules as
   bounded text direction (`videoBrandDirection`), marked as context, not copy. It is
   trimmed to fit the model's `maxPromptLength` (e.g. 2000 for Seedance on Replicate)
   after the user's prompt, direction and references; if there is not enough room it

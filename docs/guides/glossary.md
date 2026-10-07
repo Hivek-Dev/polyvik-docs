@@ -15,8 +15,8 @@ another — and three different things were called "Referencias".
 | A layout suggestion of the brand's own that the designer adapts to the content | **Molde** (layout) | `brand_templates` | ADN → Visual → Moldes |
 | Arrangements drawn in code (boxes: photo, headline, logo), one per format, no photos or words | **Moldes de Polyvik** (Polyvik layouts) | `blueprints.services.js` → `brand_templates` (4 rows with the same name) | ADN → Visual → Moldes · New campaign picks which ones |
 | A layout extracted from a piece you liked: the AI measures its zones and writes its effects; the piece itself never travels to the engine | **Extraer de una pieza** (extract from a piece) | `templateExtract.services.js` → `brand_templates` with `source='extracted'`, `zones`, `note` | ADN → Visual → Moldes |
-| Your own finished, approved pieces that everything else derives from (up to 4, rotating) | **Imágenes modelo** (model images) | `brand_assets` kind `model` → `settings.anchorUrls` | ADN → Marca (upload or pick from the gallery) |
-| Photos or approved pieces that lend light, finish and mood when there is no model image (up to 4, rotating) | **Estilo libre** (free style) | `brand_assets` kind `style_ref` | ADN → Marca (same screen as model images) |
+| Your own finished, approved pieces that everything else derives from (up to 4, rotating); the look's only owner | **Imágenes modelo** (model images) | `brand_assets` kind `model` → `settings.anchorUrls` | ADN → Marca (create with «Crea tu imagen modelo», upload, or check in the Canvas library) |
+| Captures of the brand's website taken at onboarding; they only feed the brand's first image | **Capturas de tu sitio** (website captures) | `brand_assets` kind `style_ref` | Onboarding · «Crea tu imagen modelo» |
 | Private history of generated images and videos; gives no context to the AI | **Feed** | `brand_assets` kind `canvas_gen` (+ video jobs) | Contenido → Feed |
 | Images chosen or uploaded by the user, plus a separate archive of approvals | **Biblioteca** (library) | curated `brand_assets` and `approved_piece` | Biblioteca (under ADN in the menu) |
 | Saved or uploaded materials, labelled or not | **General** | `brand_assets` kinds `other`, `product_photo`, `canvas` | Library · Canvas · creation pages |
@@ -54,12 +54,12 @@ another — and three different things were called "Referencias".
 | Asking Polyvik to redo it, saying what is wrong | **Pedir cambios** (request changes) | `piece_feedback` | Same dialog |
 | What Polyvik learned from your TEXT corrections | **Reglas aprendidas** (learned rules) | `brand_profiles.feedback_digest` | ADN → Voz |
 | Proposals already told, which it avoids repeating | **Lo que Polyvik ya contó** (what Polyvik already told) | `campaigns.ideas` + `campaign_pieces`, with `memory_from` | ADN → Voz |
-| Everything an image inherits: logo, palette, typography, free style and guidelines | **Kit** | `brand_profiles` + `brand_assets` (the main one) · `brand_kits` (seasonal ones) | ADN → Marca |
+| Everything an image inherits: logo, palette, typography, model images, visual direction and guidelines | **Kit** | `brand_profiles` + `brand_assets` (the main one) · `brand_kits` (seasonal ones) | ADN → Marca |
 | The year-round kit: it IS the brand identity, not a copy | **Kit principal** (`@principal`) | `brand_profiles` | ADN → Marca |
 | A kit that rules only on its dates, or when called by its handle | **Kit de temporada** (seasonal kit) | `brand_kits` | ADN → Marca → «Kit de temporada». Replaced Seasons |
 | How a kit is called inside a brief: `@navidad26` | **Etiqueta del kit** (kit handle) | `brand_kits.handle` | New campaign (in the brief) · «Nombre y etiqueta» dialog |
 | The days a seasonal kit rules | **Vigencia** (validity) | `brand_kits.starts_on` / `ends_on` | Kit dialog. Outside them the campaign falls back to the main kit |
-| The four 16:9 images of a kit, generated in a chain by the image model: 1 identity, 2 graphic system, 3 icons and imagery, 4 applications. Each gets the previous ones as reference; redoing #1 marks the rest «desactualizadas» (outdated) | **Lámina** (kit sheet) · «Lámina 1…4» | `brand_kit_sheets` (`brandKit.services.js`, `boardPrompt`) | ADN → Marca. «Generar kit» / «Completar kit» / «Regenerar kit» run the chain. Each sheet is a real image generation: it costs and shows up in Usage |
+| One text with the brand's mood, composition, graphic resources and what to avoid; read by the designer, never by the writer | **Dirección visual** (visual direction) | `brand_profiles.visual_direction` | ADN → Marca |
 | Redoing just one area of a Canvas image: paint over it with the brush and write what goes there | **Retoque** (retouch, brush) | `retouchImage` in `imageGenerator.services.js` · `POST /api/canvas/retouch` | Canvas → brush icon in the node bar. Costs a full image, not a fraction |
 | A reusable communication guide with its own facts and copy roles, independent of a Molde | **Tipo de publicación** (publication type) | `publicationRecipes.config.js` | Create images · first brand image |
 | A brand’s main and optional secondary communication orientation | **Dirección** (content direction) | `brand_profiles.voice.contentOrientation` / `secondaryOrientation` | Onboarding · Create images |
@@ -79,13 +79,12 @@ one into a kit and dropped the table. A seasonal kit is frozen into the campaign
 plan as its season (`plan.season`), which is what the designer and the image
 engine already knew how to read.
 
-**A kit sheet only changes when someone sends it to generate.** Filling in an
-element does not redo it: it is the image the customer shows, not a mirror of
-the form. The button says how many elements it will use («Usando 3 elementos»,
-"Using 3 elements") and the previous sheet stays until Regenerate is pressed.
+**Kit sheets («Láminas»), the brand board and free style («Estilo libre») were
+retired on 7 Oct 2026.** None of them reaches generation; the look has one owner,
+the model images. See [Brand identity and kits](../product/brand-kit.md).
 
-**The logo and the free style belong to the brand, not the kit.** A seasonal kit
-inherits them from the main one. Giving each kit its own logo would force
+**Logo, typeface, rules and model images belong to the brand, not the kit.** A
+seasonal kit only changes name, handle, dates, colours and motifs. Giving each kit its own logo would force
 deciding which one is "the" brand logo in ADN, and that is a materials-model
 problem, not this screen's.
 
@@ -114,9 +113,9 @@ order of authority:
 
 | What | Where | What it lends | When it travels |
 |---|---|---|---|
-| **Brand board** | ADN → Marca | Colours and fonts; no other written layout instruction is extracted | As an image, unless there is a model image |
-| **Imagen modelo** | ADN → Marca | Medium, light, finish and treatment | One selected; respects explicit font, palette and logo |
-| **Ejemplos de tu estilo** (style examples) | ADN → Marca | The look. No roles: they do one job | Only if there is NO model image: they are its fallback |
+| **Imagen modelo** | ADN → Marca | Medium, light, finish and treatment | One per piece, rotating; respects explicit font, palette and logo |
+| **Dirección visual** | ADN → Marca | Mood, composition and graphic resources, as text | Read by the designer and the finisher |
+| **Capturas de tu sitio** | Onboarding | The look of the brand's first image | Only to the first image, never to pieces |
 | **Moldes** | ADN → Visual | Suggested spaces, proportions and margins | One per piece, by rotation, read by the designer |
 | **Biblioteca** | Its own page | Concrete subjects | Never on their own: with `@` or pinned in Ajustes → Piezas |
 
@@ -127,23 +126,13 @@ automatic material or a layout. Only General feeds candidates and mentions;
 approved images can be chosen explicitly in the Lab. More in
 [feed and library](../image/feed-and-library.md).
 
-The first three used to be spread across three places — the model image in
-Ajustes → Piezas, the examples in Visual, the board in Marca — and all three say
-the same thing. In Marca they go in cause-and-effect order: on top what Polyvik
-LOOKS AT (board, logo, examples) and below what it EXTRACTS from looking
-(palette and typography). The identity analysis reads them together: the board
-rules and the references fill in what it leaves unclear.
-
-**The note on an example is written by the AI.** The wand describes it — how it
-looks, never what it shows — and that description is saved as its note: it is
-what travels attached to the image when the engine uses it, and what the
-identity analysis reads. It can be corrected by hand: the AI writes it, the
-customer decides.
+The model image used to live in Ajustes → Piezas, next to examples in Visual and
+a board in Marca, all saying the same thing. Since 7 Oct 2026 only the model
+images remain, in Marca.
 
 **The writer works with the brand's audience and voice**, and also writes the
 text that goes on the image. The designer sees the model image and reads the
-Molde to decide a final composition. The board analysis extracts colours and
-fonts; no other written layout instruction.
+Molde to decide a final composition.
 
 **The table and the API route stay `brand_series` and `/api/series`.** Renaming
 them was churn with no gain, and there is precedent: `brand_references` is what
@@ -163,7 +152,7 @@ Each already has its name in the table above. Using them reopens the ambiguity:
 | Do not write | Write |
 |---|---|
 | Posts aprobados (when talking about reusable arrangements) | Moldes |
-| Referencias de estilo | Referencias de marca |
+| Referencias de estilo | Imagen modelo |
 | Referencias fijas | Materiales fijos |
 | Plantilla (for the blog or a landing) | Diseño |
 | Tema · Temporada (to dress a campaign) | Kit de temporada |
@@ -173,7 +162,7 @@ Each already has its name in the table above. Using them reopens the ambiguity:
 | Serie | Sección |
 | Plantilla · retícula | Molde (the object) · acomodo (what it lends) |
 | El look de tu marca · ancla | Imagen modelo |
-| Referencias de marca | Ejemplos de tu estilo |
+| Referencias de marca · Ejemplos de tu estilo · Estilo libre | Imagen modelo |
 | Ajustes de piezas | Piezas |
 | Guion (for a campaign's list) | Propuestas |
 | Sending a scheduled piece back to review (edits or reschedules; nothing is lost) | Reabrir (reopen) |

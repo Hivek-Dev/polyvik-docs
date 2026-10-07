@@ -56,9 +56,14 @@ freezes when it is created.
 ## What each input contributes
 
 - **Model image** (`anchorUrls`, up to 4): the approved finished look — ideally
-  finished pieces with text, not raw Canvas photos. One rotates per piece. With a
-  model image, the brand board and free style are not attached as well.
-- **Free style:** fallback when there is no model image; one rotates per piece.
+  finished pieces with text, not raw Canvas photos. One rotates per piece. It is
+  the look's only owner: without one, a piece has no look reference and palette,
+  typeface and visual direction carry the brand.
+- **Website captures** (`brand_assets` kind `style_ref`): only for the brand's
+  first image (onboarding and «Crea tu imagen modelo», option `siteLooks`).
+- **Visual direction** (`brand_profiles.visual_direction`): one text with mood,
+  composition, graphic resources and what to avoid. The image director and the
+  piece finisher read it; copy prompts (campaign ideas, blog) don't.
 - **Molde:** structure and zones. The requested format wins; the arrangement
   adapts. It never imposes the output format or lends subjects.
 - **Extracted Molde:** zones plus a note on effects and layering. The note travels
@@ -74,28 +79,32 @@ The campaign recipe keeps its settings; identity and model images are read live.
 
 ## The reference system: one owner per dimension
 
-Since 7 Oct 2026 every entry point (Create images, tools, campaign pieces, the kit
-studio) follows the same ownership rules. Two layers of tests freeze them:
+Since 7 Oct 2026 every entry point (Create images, tools, campaign pieces, the
+model-image studio) follows the same ownership rules. Two layers of tests freeze them:
 `polyvik-core/test/referenceSystem.test.js` (what each provider receives, image by
 image) and `test/canvasReferences.test.js` (what Create images decides).
 
 | Dimension | Owner | Rule |
 |---|---|---|
-| Look / finish | A **model image** (one, rotating) — or, without one, the **free-style bank** | Never both. With a model image the board and the bank stay home (`anchored`) |
+| Look / finish | A **model image** (one, rotating) | Without one, no look reference travels. Website captures only reach the brand's first image |
 | Layout | The Molde | Look references lend finish, never composition |
 | Typography | The brand's typeface (`palette.fonts[0]`) | Sent with text-bearing Create images pieces; every look caption yields to it |
 | Colors | The kit palette (or the seasonal one) | Once per prompt |
 | Logo | The brand logo | One: an explicit `logo` reference replaces the automatic one |
 | Content | What the user attaches | Outranks the look |
 
-- **Free-style bank** (`config/references.config.js`): up to 12 images
-  (`MAX_STYLE_BANK`), website captures included; each generation takes 2
-  (`STYLE_REFS_PER_IMAGE`) via `pickAmbientRefs` — random, or deterministic with
-  `lookRotation`. Campaign pieces pick their own single free-style image and never
-  send the rest (`profileStyleRefs: false`).
+- **Website captures** (`config/references.config.js`): up to 12 kept from
+  onboarding (`MAX_STYLE_BANK`); the brand's first image takes 2
+  (`STYLE_REFS_PER_IMAGE`) via `siteLookRefs` and `pickAmbientRefs`. Nothing else
+  receives them. Existing model images never travel to that first image.
+- **Free style, the brand board and kit sheets are retired** (7 Oct 2026): none
+  of them reaches generation. See [Brand identity and kits](../product/brand-kit.md).
 - **Model images in Create images:** one is attached as the anchor only when a slot
-  is free; it never displaces the user's references. Tools pass `lookAnchor: false`:
-  a finished designed piece as a look would turn a product photo into a poster.
+  is free; it never displaces the user's references.
+- **Tools** ask for the anchor with `lookAnchor: true` only when they make a
+  designed piece (ad variations, the carousel cover). Photo tools (product shoot,
+  UGC, app mockups) take none: a finished designed piece as a look would turn a
+  product photo into a poster.
 - **The cap** (`MAX_REFERENCES`, 6 explicit references) cuts by priority after
   ordering — anchor, base, layout, character, product, place, logo, content,
   style… — never by arrival order.
@@ -104,7 +113,6 @@ image) and `test/canvasReferences.test.js` (what Create images decides).
   the previous version".
 - The anchor's caption travels once, attached to its image; the piece brief no
   longer repeats it.
-- The kit studio drops the board when model images own the look.
 
 ## Reference roles
 
@@ -114,7 +122,7 @@ mirrors the user-facing roles in `polyvik-panel/src/lib/refUse.ts`.
 | Role | Contributes |
 |---|---|
 | `base` | Image to edit, keeping what was not asked to change (Canvas/Studio) |
-| `board` | An earlier board of the same brand kit (core only, used by the [brand kit](../product/brand-kit.md)) |
+| `board` | An earlier board of the same brand kit (core only; no caller since kit sheets were retired) |
 | `layout` | Arrangement; not the reference's subjects or words |
 | `character` | Character identity |
 | `product` | Product and its features |
@@ -173,8 +181,8 @@ automatic context, and is not copied into notes when saving to the Library.
 "How this image was generated" detail; the first view of a preview uses the plan
 already returned by the generation.
 
-The designer receives the same model image the engine uses. With a model image it
-does not receive free-style notes; the old `palette.style` / `style_en` prose and
+The designer receives the same model image the engine uses. It does not receive
+look notes from any other image; the old `palette.style` / `style_en` prose and
 the written style field are retired. Old previews that only kept `previewUrl` and
 `previewCopy` have no reconstructed plan; the panel says there is no evidence. Free
 generations from Lab, blog and events do not produce a campaign `imagePlan` and may

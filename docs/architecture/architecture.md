@@ -171,13 +171,13 @@ it is in the [backlog](../product/backlog.md).
 
 | Material | Lives in | Roles it accepts |
 |---|---|---|
-| Model images and free style | ADN → Marca | visual finish; one model image rotates or, without one, a free-style example |
+| Model images | ADN → Marca | visual finish; one rotates per piece. Without one, no look reference travels |
 | Library | Library (`/library`) | character, product, object, place |
 | Reusable copy | ADN → Voz | — |
 | Layouts (Moldes) | ADN → Visual → Moldes | structure, zones and treatments; layout in automatic generation |
-| Visual identity | ADN → Marca | brand board, logo, palette, typefaces |
+| Visual identity | ADN → Marca | logo, palette, typeface, visual direction |
 
-With a model image, the board and free style are not attached too.
+Website captures from onboarding only reach the brand's first image («Crea tu imagen modelo»).
 **Subjects** come in when summoned with `@` or pinned in Ajustes → Piezas; the
 logo follows its configured mode. The anchor (model image) and the layout never
 lend subjects just by appearing in a reference.

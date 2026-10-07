@@ -57,7 +57,7 @@ The prefix only says where a file came from, not whose it is. Anyone who knew
 the URL of another brand's image could pass it as a reference and pull it into
 their own generation. So images that come from the client are also checked
 against the brand with `assertBrandAssetUrl` / `assertBrandAssetUrls`
-(`brandGuard.js`), which look in the brand's assets and its kit sheets. Video
+(`brandGuard.js`), which look in the brand's assets and its old kit sheets. Video
 media has its own check (`assertOwnedVideoMediaUrl`).
 
 ## Webhooks

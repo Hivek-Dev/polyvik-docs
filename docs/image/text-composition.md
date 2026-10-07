@@ -97,8 +97,8 @@ limits how much the image carries.
 **Molde** is the name for layout templates: it suggests structure and proportions
 and never forces the designer to keep its rectangles. The model image gives finish,
 medium, lighting and treatment. Explicit font, palette and logo settings win.
-Without a model image, one Free style reference is chosen and shared by designer
-and engine. The provider never receives the Molde image. The designer (and the
+Without a model image there is no look reference; palette, typeface and visual
+direction carry the brand. The provider never receives the Molde image. The designer (and the
 finish, when it runs) does see the Molde drawing to judge density and pauses;
 extracted Moldes add their measured zones as suggestions, not coordinates.
 
@@ -177,9 +177,9 @@ against scene pixels or transparency: that needs visual review.
   truncated; not duplicated in `platform_meta.imagePrompt`.
 - The Molde extractor supports up to 12 zones and keeps small secondary text from
   0.1% of area. Saved Moldes are not modified; re-extract to recover dropped zones.
-- **Visual style and arrangement** was removed from the panel, board analysis and
-  prompts (Canvas included). Old `palette.style` / `style_en` are ignored; the board
-  still contributes colors and fonts.
+- **Visual style and arrangement** was removed from the panel and prompts (Canvas
+  included). Old `palette.style` / `style_en` are ignored. Board analysis was
+  retired on 7 Oct 2026; colours can still be read from any image.
 
 ## Verification
 

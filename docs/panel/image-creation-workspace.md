@@ -49,7 +49,7 @@ control attached to that composer.
 - **References:** picked from the brand's Library or Feed, or uploaded, through the
   shared [`CreationReferencePicker`](../../../polyvik-panel/src/components/CreationReferencePicker.tsx).
   Up to six images, each with its reference role (`refUseOptions`).
-- **Brand DNA dialog:** toggle, palette, personality and a link to edit the brand
+- **Brand DNA dialog:** toggle, palette, tone and a link to edit the brand
   identity. It also saves the primary and optional secondary publication direction
   without changing the visual identity. The toggle maps to `useBrandStyle`.
 - **Art direction dialog:** a style guide from `GET /api/canvas/skills` and an

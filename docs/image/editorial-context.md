@@ -3,7 +3,7 @@
 ## Authority
 
 `editorialContext.services.js` holds the criteria shared by proposals, copywriter,
-designer, blog, sections, the DNA assistant, identity analysis, visual notes,
+designer, blog, sections, the DNA assistant, kit palette and elements, visual notes,
 Studio and correction learning. It is split in two so it caches well: the
 **rules** (`editorialRules()`, identical for every brand) and the **facts**
 (`editorialFacts()`, this brand and this request).
@@ -11,6 +11,12 @@ Studio and correction learning. It is split in two so it caches well: the
 DNA → Voice stores `voice.audience` and `voice.locale` (free text for language and
 variant, e.g. "Español de México", not a fixed market list). A partial voice update
 keeps the other fields. No migration: existing JSONB.
+
+«Sobre tu negocio» (`brand_profiles.description`) is the one free text about the
+business. «Notas particulares» was folded into it by migration 089, and the
+personality lives in the tone; `notes` and `personality` are no longer written or
+read (the columns stay for rollback). The visual direction is not editorial
+context: only image generation reads it.
 
 Priority: the user's explicit request, then the language chosen for the
 piece/campaign, then DNA language and audience. `editorialLocale()` resolves the

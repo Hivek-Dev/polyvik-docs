@@ -105,7 +105,7 @@ Details: [image engine](../image/image-engine.md), [text composition](../image/t
 - **Open** — Blog images do not go through the designer: the blog uses
   `applyPolicyPrompt` only, so no seven-section brief, no logo mode.
 - **Open** — Only the first family in `palette.fonts` is used
-  (`selectedFontNote`). The board detects several; the rest are stored unused.
+  (`selectedFontNote`); any other stored family is unused.
 - **Open** — Catalog items' `images` and `attrs` (`catalog_items`) are stored
   but never reach the generator; only name, description and price do.
 - **Verify** — Template variety: in the 22 Sep QA run, 4 of 5 pieces picked
@@ -115,23 +115,12 @@ Details: [image engine](../image/image-engine.md), [text composition](../image/t
 
 Details: [brand kit](brand-kit.md).
 
-- **Open** — Version and approval: store the kit version used by each
-  generation, mark a sheet as outdated when its data changes, separate
-  "generated" from "approved", and flag affected applications for review when
-  inputs change.
 - **Open** — Export: a package with the original logo, palette with codes and
   uses, type data and full rules, plus a manifest (version, date, materials).
   Font files only if their licence allows distribution.
-- **Open** — Result review: presence of the supplied data, legibility of text
-  and codes, contrast computed from stored values (a ratio drawn inside an image
-  proves nothing), no duplicated or invented logos in the scene.
-- **Open** — Fix one application alone, without redoing or charging all.
-- **Open** — Seasonal kit typography and guidelines do not reach piece
-  generation; only name, colours and motifs do (`campaignPlan.services.js`).
-- **Open** — Logo and look per kit (today they belong to the brand).
-- **Verify** — Full sheet chain and the logo's transparent background against
-  OpenAI. If the model rejects `background: transparent`, it retries opaque and
-  the logo would come out on a painted background.
+- **Verify** — The generated logo's transparent background against OpenAI. If
+  the model rejects `background: transparent`, it retries opaque and the logo
+  would come out on a painted background.
 
 ## Video
 
@@ -184,7 +173,7 @@ Built and deployed, but the real path has not been run end to end.
 - Director memory (`brand_ideas`): with the list of past ideas in the prompt,
   the model actually changes idea.
 - Model images rotate: four pieces of one campaign come from four different
-  model images, and with none, the look images rotate one per piece.
+  model images.
 - Brand taste comes from Voice and `voice.purpose`: try a sales-driven taco
   shop, a cheerful influencer and a sober law firm. Known risk: without a
   written Voice the model falls back to generic marketing; the answer is to ask
@@ -194,8 +183,6 @@ Built and deployed, but the real path has not been run end to end.
   22 Sep QA run.
 - A fixed Character reference reproduces the real character, not one invented
   from its name; a template lends its grid and no subject.
-- Kit sheets accompanying pieces (`kitBoardForPieces`) make two pieces share
-  panels and borders.
 - Brush retouch end to end against OpenAI from the server (tested with mocks,
   the browser against a mocked API, and by hand).
 
@@ -218,6 +205,10 @@ In case someone questions them later:
   was dropped (migration 037): the brand already states its look through its
   art directions, palette and anchored look, which the customer wrote and
   approved; model-inferred prose next to it would be a second authority.
+- **One owner for the look** (7 Oct 2026). Model images own it; free style,
+  the brand board and kit sheets were retired. Seasonal kits own only name,
+  handle, dates, colours and motifs; logo, typeface, rules and model images are
+  the brand's. See [Brand identity and kits](brand-kit.md).
 - **No starter sections.** The six old pillars were deleted; a brand starts
   empty and creates its own.
 - **Image provider.** Pieces and the kit always use OpenAI

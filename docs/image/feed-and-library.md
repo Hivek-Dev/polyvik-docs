@@ -46,7 +46,7 @@ in that tab. Studio and Canvas can pick from General and Approved pieces; Settin
   not copy the prompt, generation notes or tags. Saving is idempotent, even with
   concurrent requests.
 - References the user picks explicitly still work, including Studio actions that
-  turn a result into a model image or free style. Previously edited notes on
+  turn a result into a model image. Previously edited notes on
   existing materials are not deleted or reinterpreted as prompts.
 
 ## API
