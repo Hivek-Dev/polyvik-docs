@@ -19,7 +19,23 @@ not access restrictions. Users can still explore every type.
 
 Website analysis receives the current twelve-line catalog in both the enum and
 prompt, avoiding a stale four-objective list.
-The selections live in `brand_profiles.voice.contentOrientation` and
+## Brand category (sector)
+
+Since 7 Oct 2026 the brand stores its catalog category in `brands.sector`
+(migration `086_brand_sector.sql`), separate from `vertical`, the brand's own
+free-text description ("Cafetería de especialidad").
+
+- Picking a category in onboarding (`BrandSectorPicker`) saves its id. The typed
+  vertical is kept as the brand wrote it.
+- A brand without a stored sector gets one inferred from its vertical by keywords
+  (`polyvik-core/src/utils/brandSector.js`). `GET /api/brands` returns it with
+  `sectorInferred: true`. Text with no clue ("general", the brand's name) gets none.
+- Brand DNA → company details shows the category; an inferred one appears as a
+  suggestion with **Confirmar**. `PUT /api/brands/:id` accepts `sector` (a catalog
+  id, or `''` to clear it).
+- Recommendations match the sector by id, or by exact label for older data.
+
+The content-line selections live in `brand_profiles.voice.contentOrientation` and
 `secondaryOrientation`. Existing brands and old API clients keep working without
 these keys; no migration or automatic rewrite is needed. Create images exposes
 **Cambiar dirección**, saved as a partial voice patch preserving other voice fields.
@@ -27,10 +43,18 @@ these keys; no migration or automatic rewrite is needed. Create images exposes
 ## Choosing a piece
 
 Create images and the first-brand-image editor share `PublicationStudio`. They show
-six starting recommendations. Sector-relevant types within the primary line
-appear first, followed by remaining primary and secondary types without duplicates.
-A custom industry keeps the content-line recommendations. With no content line,
-sector recommendations are available. **Ver todos** opens the searchable 80-type
+twelve starting recommendations (`recommendedRecipes` in
+`polyvik-panel/src/lib/publicationRecipes.ts`), in this order:
+
+1. the sector's types that are in the primary line, then in the secondary line;
+2. the rest of the primary line;
+3. the rest of the sector's types;
+4. the rest of the secondary line.
+
+The content line stays intentional (a memes brand sees every meme before any
+sector type outside humor), but since 7 Oct 2026 no type of the brand's sector is
+hidden: a technology brand on the "solutions" line also gets its infographic and
+webinar. **Ver todos** opens the searchable 80-type
 catalog, with a filter for each of the twelve lines; **Crear libre** clears the active
 guide and restores the existing free brief / Molde text controls.
 
@@ -50,7 +74,7 @@ loading, editing or direction changes. Requests are not automatically resubmitte
 ## Catalog scope
 
 The API source is `publicationRecipes.config.js`, extended by
-`publicationExpansion.config.js`. Version `2026-10-06.2` contains 80 unique guides,
+`publicationExpansion.config.js`. Version `2026-10-06.3` contains 80 unique guides,
 24 business categories and twelve content lines. A guide can belong to multiple
 lines; their counts therefore must not be summed to find the catalog size.
 Existing 30 recipe IDs, their field keys, and the four original orientation IDs
