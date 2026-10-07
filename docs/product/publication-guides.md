@@ -74,11 +74,17 @@ loading, editing or direction changes. Requests are not automatically resubmitte
 ## Catalog scope
 
 The API source is `publicationRecipes.config.js`, extended by
-`publicationExpansion.config.js`. Version `2026-10-06.3` contains 80 unique guides,
+`publicationExpansion.config.js`. Version `2026-10-07.1` contains 80 unique guides,
 24 business categories and twelve content lines. A guide can belong to multiple
 lines; their counts therefore must not be summed to find the catalog size.
 Existing 30 recipe IDs, their field keys, and the four original orientation IDs
-remain valid for saved brands and drafts. No database migration is required.
+remain valid for saved brands and drafts.
+
+Since `2026-10-07.1` the diagram types without a headline role (`visual_compare`,
+`process_map`, `decision_tree`) have an optional **Título** copy field, shown
+first. Without it the engine printed a fact as the title. It uses its own key
+(`copy_title`), so saved drafts keep their `copy_N` fields where they were. The
+copy contract also says each approved string appears exactly once in the image. No database migration is required.
 
 | Content line | Available types | Examples |
 |---|---:|---|
