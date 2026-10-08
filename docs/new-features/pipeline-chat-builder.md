@@ -321,7 +321,7 @@ Note: the schema in the prompt omits `quickReplies` and `requestedUploads`, alth
   ```
 
 - LLM task: `canvas_pipeline` in `llmTasks.config.js`, **Sonnet 5, effort medium, cache "5m"**. Split the system prompt into `{ stable: catalog + rules, variable: skills + brand + characters }` so the catalog is cached.
-- Inject Polyvik context instead of generic "saved skills": the `skills/` folder (01–15) via `skillsLibrary.services.js`, the brand's saved directives (`listDirectives`), and **characters** (`listCharacters`), so the model can emit an Element node bound to an existing character id.
+- Inject Polyvik context instead of generic "saved skills": the brand's saved directives (`listDirectives`) and **characters** (`listCharacters`), so the model can emit an Element node bound to an existing character id. Polyvik no longer ships a skills library (removed on 8 Oct 2026).
 - Route: `POST /canvas/pipeline-suggest`, `credit("assist")`. The local parse path costs nothing.
 - Validate on the server: unknown kinds are dropped, edges to missing ids are dropped, gates are enforced (an Animate node without an upstream Keyframe is rejected, per §5 of the plan).
 - Reference analysis: reuse `asset_describe` (Haiku) from `assets.services.js` instead of building a new describe endpoint.
@@ -348,7 +348,6 @@ Note: the schema in the prompt omits `quickReplies` and `requestedUploads`, alth
 - The layout must know Polyvik's real node widths; the numbers 640 and 400 fitted Monkey Studio nodes.
 - Should the chat be able to **edit** an existing canvas ("make shot 3 darker")? Monkey Studio only appended graphs. Recommendation: append-only for v1.
 - The Markdown format is a power-user feature; keep the parser but hide the syntax from the UI.
-- Skill auto-pick: Polyvik skills are video styles (01–15), so the prompt text must describe them as such.
 
 ## Effort
 

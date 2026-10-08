@@ -52,14 +52,14 @@ control attached to that composer.
 - **Brand DNA dialog:** toggle, palette, tone and a link to edit the brand
   identity. It also saves the primary and optional secondary publication direction
   without changing the visual identity. The toggle maps to `useBrandStyle`.
-- **Art direction dialog:** a style guide from `GET /api/canvas/skills` and an
-  optional instruction.
+- **Art direction dialog:** an optional extra instruction. (The style guide list
+  was removed on 8 Oct 2026.)
 - ⌘/Ctrl + Enter generates.
 
 ## Generation
 
 One request to `POST /api/canvas/generate` with brand, prompt, provider, aspect ratio,
-image size, references (`url` + `use`), `useBrandStyle`, `skillId` and the extra
+image size, references (`url` + `use`), `useBrandStyle` and the extra
 instruction as `contextTexts`, plus optional structured `publication` facts/copy. Submission is locked while pending and is **never
 retried automatically** (a retry could charge a second image). On generation failure,
 the stage shows the shared `ImageRecoveryCard`, while retaining the prompt, approved
