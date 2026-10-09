@@ -16,14 +16,19 @@ share. It started on 9 Oct 2026.
   the prompt the item was made with, and no person's name or email.
 - **Likes.** Anyone signed in can like a post, once per person. A like can be
   undone, and the panel updates it optimistically.
-- **Order.** `Recientes` puts the newest first (the cursor is the last post
-  id). `Populares` puts the most liked first (the cursor is an offset).
+- **Order.** `Más nuevas` and `Más antiguas` go by post id (the cursor is the
+  last id). `Populares` puts the most liked first (the cursor is an offset).
+  `Aleatorio` shuffles with a seed drawn on the first page; the cursor carries
+  it with the offset (`seed.offset`), so scrolling continues the same order
+  without repeats, and coming back to the tab deals a new shuffle.
+- **The grid.** Only the pictures. The heart and its count show in the
+  corner on hover (always on touch screens); opening a post shows its brand.
 - **Taking a post down.** The account that shared it can take it down from
   Media or from the Feed. A platform admin can take any post down
   ("Quitar (moderación)"). Deleting the item in Media also removes the post,
   and its likes go with it.
 - **Getting there.** The band under Media's tabs leads to the Feed with
-  "Ir al Feed", and the Feed has "Ir a Media" for the way back.
+  "Ir al Feed".
 
 ## Polyvik's own posts
 
