@@ -101,7 +101,9 @@ opacity modifiers work (`bg-fg/8`).
 
 Radii: `rounded-ctl` 6 px for controls, `rounded-row` 8 px for rows and tiles,
 `rounded-card` 10 px for cards, `rounded-dialog` 12 px for dialogs and
-popovers. Shadows: `shadow-xs` sits under controls and cards (none in light,
+popovers, `rounded-media` 14 px for image and video previews and
+`rounded-media-sm` 10 px for small thumbnails. The veil behind dialogs and
+drawers is `overlay`, dark in both themes. Shadows: `shadow-xs` sits under controls and cards (none in light,
 where hairlines do the work), `shadow-float` under menus and toasts, and
 `shadow-dialog` under dialogs. Tailwind writes shadow values into utilities at
 build time, so their colors go through `--pv-shadow-*` variables, set per
@@ -150,7 +152,7 @@ the control to everyone.
 | `Empty` | An empty state that says what will appear. `variant="inline"` is the one-line dashed row inside a card, and with `to` it becomes the way in. |
 | `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
 | `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
-| `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. The scrim and its text use `scrim` and `on-scrim`, which stay the same in both themes because they sit on a photo. |
+| `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. `scrim` and `on-scrim` follow the theme: white with dark text in light, black with white text in dark. Images never zoom on hover. `size="sm"` is for small thumbnails. |
 | `.media-outline` | A class for any image or video box. It draws a 1 px hairline inside the media, over it (`--pv-media-outline`: black 10 % in light, white 8 % in dark), so a pale photo doesn't melt into a white card and a dark one doesn't melt into the dark page. `MediaTile`, the gallery tiles and the dialogs' large image already use it. |
 | `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
 | `Properties` | Label/value pairs in a quiet bordered list. |
