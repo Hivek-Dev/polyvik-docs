@@ -27,6 +27,7 @@ These documents exist so that anyone, human or agent, can join the project knowi
 | [product/publication-guides.md](product/publication-guides.md) | When touching brand directions or guided post types |
 | [product/brand-kit.md](product/brand-kit.md) | When touching DNA → Brand: logo, palette, typeface, model images, visual direction, seasons |
 | [product/brand-management.md](product/brand-management.md) | When touching the brand list, brand creation or deletion |
+| [product/community-feed.md](product/community-feed.md) | When touching the community Feed: sharing from Media, likes, moderation |
 | [product/backlog.md](product/backlog.md) | When picking what's next (open items, decisions, risks) |
 | [new-features/README.md](new-features/README.md) | For new features to build, each with its own spec |
 
