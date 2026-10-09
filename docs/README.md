@@ -55,6 +55,7 @@ These documents exist so that anyone, human or agent, can join the project knowi
 | Document | Read it when |
 |---|---|
 | [panel/design-system.md](panel/design-system.md) | **Before any UI change**: tokens, light/dark, components, migrating a screen |
+| [panel/screen-map.md](panel/screen-map.md) | Every panel screen: what it needs from the design system, size, status, missing components |
 | [panel/design-guide.md](panel/design-guide.md) | Superseded: the DNA style, for screens not yet migrated |
 | [panel/image-creation-workspace.md](panel/image-creation-workspace.md) | When touching Create images |
 | [panel/video-creation-workspace.md](panel/video-creation-workspace.md) | When touching Create video and Characters |

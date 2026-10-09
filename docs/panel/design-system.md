@@ -140,7 +140,15 @@ the control to everyone.
 | `Tooltip` | A short label after a beat. Never the only place where something is said. |
 | `Badge`, `Kbd`, `Avatar` | Status pills (tone + dot), keys, people and brands. |
 | `Card`, `CardHeader`, `List`, `ListRow` | Card with a hairline; lists with rows split by hairlines, edge to edge. |
-| `Empty`, `PageTitle` | Empty states that say what will appear; a page title with its main action. |
+| `Empty` | An empty state that says what will appear. `variant="inline"` is the one-line dashed row inside a card, and with `to` it becomes the way in. |
+| `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
+| `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
+| `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. The scrim and its text use `scrim` and `on-scrim`, which stay the same in both themes because they sit on a photo. |
+| `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
+| `Properties` | Label/value pairs in a quiet bordered list. |
+| `Callout` | A toned notice (`info`, `ok`, `warn`, `error`) with icon, title, body and action. It replaces `WarningBanner`. |
+| `ProgressBar` | A thin bar, determinate or indeterminate, with a tone for limits. |
+| `Spinner` | Waiting for something short, with an optional label. |
 
 `ui.tsx` still exports the old constants (`btnPrimary`, `inputClass`, `card`,
 `Modal`, `Toast`, `StatusTag`…). They now draw from `ds/recipes.ts`, so old
@@ -164,9 +172,13 @@ constant has no users left, delete it.
 
 ## Migration status
 
+The full per-screen map, with missing components and the order, is in
+[screen-map.md](screen-map.md).
+
 | Area | Status |
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
+| Home, with its plan card | Migrated (9 Oct 2026) |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
-| Home, Calendar, Feed, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
+| Calendar, Feed, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
 | Login, Sign-up, Onboarding, Phone upload | Stay dark by design; restyle later |
