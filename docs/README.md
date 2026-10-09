@@ -54,7 +54,8 @@ These documents exist so that anyone, human or agent, can join the project knowi
 
 | Document | Read it when |
 |---|---|
-| [panel/design-guide.md](panel/design-guide.md) | **Before any UI change**: tokens, components, the DNA style |
+| [panel/design-system.md](panel/design-system.md) | **Before any UI change**: tokens, light/dark, components, migrating a screen |
+| [panel/design-guide.md](panel/design-guide.md) | Superseded: the DNA style, for screens not yet migrated |
 | [panel/image-creation-workspace.md](panel/image-creation-workspace.md) | When touching Create images |
 | [panel/video-creation-workspace.md](panel/video-creation-workspace.md) | When touching Create video and Characters |
 | [panel/feed-header-artwork.md](panel/feed-header-artwork.md) | When touching the Feed hero artwork |

@@ -1,5 +1,9 @@
 # Polyvik Panel — Design guide
 
+> **Superseded on 9 Oct 2026 by [design-system.md](design-system.md).** It is kept
+> as a reference for screens that haven't migrated yet. New UI follows the design
+> system, and a screen leaves this guide when it migrates.
+
 For anyone writing UI in `polyvik-panel` (human or Claude Code). **If a value is not
 here or in [`src/index.css`](../../../polyvik-panel/src/index.css), it does not exist.**
 
