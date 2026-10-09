@@ -149,6 +149,11 @@ the control to everyone.
 | `Callout` | A toned notice (`info`, `ok`, `warn`, `error`) with icon, title, body and action. It replaces `WarningBanner`. |
 | `ProgressBar` | A thin bar, determinate or indeterminate, with a tone for limits. |
 | `Spinner` | Waiting for something short, with an optional label. |
+| `Dialog`, `DialogHeader`, `Pager` | The one dialog: overlay, raised panel, focus trap, Esc and click outside, focus back to the opener. The header holds the title, tools such as the `Pager` («‹ 3/12 ›»), and the ✕. `DialogShell` is now an alias of it, so every large dialog uses it. |
+| `ConfirmInline` | A destructive action confirmed in place, with a Cancel / Delete pair and no second dialog. |
+| `SearchInput` | A field with a magnifier that clears with Esc or ✕. `collapsible` shows only the magnifier until it's used. |
+| `BulkActionBar` | The floating "N selected" bar with actions and Cancel. |
+| `Skeleton`, `Shimmer`, `Masonry` | Placeholders shaped like their content, and the masonry layout (shortest column, staggered entrance). |
 
 `ui.tsx` still exports the old constants (`btnPrimary`, `inputClass`, `card`,
 `Modal`, `Toast`, `StatusTag`…). They now draw from `ds/recipes.ts`, so old
@@ -178,7 +183,9 @@ The full per-screen map, with missing components and the order, is in
 | Area | Status |
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
-| Home, with its plan card | Migrated (9 Oct 2026) |
+| Home (now at `/hoy`), with its plan card | Migrated (9 Oct 2026) |
+| Feed, now the front page (`/`), with its gallery and image/video dialogs | Migrated (9 Oct 2026) |
+| Every `DialogShell` dialog (chrome only: header and frame) | Migrated through the alias |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
-| Calendar, Feed, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
+| Calendar, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
 | Login, Sign-up, Onboarding, Phone upload | Stay dark by design; restyle later |

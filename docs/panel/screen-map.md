@@ -35,9 +35,9 @@ or needs new domain components.
 | Area | Screen (route) | Main files | Size | Light-mode risk | Status |
 |---|---|---|---|---|---|
 | Frame | Top bar and menus | `Layout`, `BrandSwitcher`, `UsagePanel`, `Notifications`, `ToolsMenu` | — | — | Migrated |
-| Day to day | Home (`/`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct) |
+| Day to day | Today (`/hoy`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct) |
 | | Calendar (`/calendario`) | `Calendar.tsx` 601, `CalendarDialogs.tsx` 474 | L | Hero; faint day-cell tints | Pending |
-| Content | Feed (`/feed`) | `Feed.tsx` 710 + css, `Gallery.tsx` 354, `ImageDialog.tsx` | L | Orbit art, tile hover labels | Pending |
+| Content | Feed, the front page (`/`; `/feed` redirects) | `Feed.tsx` + css, `Gallery.tsx`, `ImageDialog.tsx`, `GridSizeToggle` | L | — | Migrated (9 Oct) |
 | | Library (`/library`) | `Materials.tsx` 688 | M | Hero; drag overlay | Pending |
 | | Campaigns (`/campaigns`) | `Campaigns.tsx` 212 | S | Hero | Pending |
 | | Campaign brief and ideas (`/campaigns/new`, `/:id`) | `CampaignNew.tsx` 1143, `PieceModals`, `PieceStudio`, `PieceHistory`, `CampaignIdeaPreview` | L | Generation glyph, loader shadow, chips on accent | Pending |
@@ -72,12 +72,12 @@ they live next to their screen but are built only from ds parts and tokens.
 
 | Component | Needed by | What it does |
 |---|---|---|
-| Dialog / ConfirmDialog | Almost every screen | One dialog: sizes, header slot, busy lock, cancel/confirm footer, danger variant. Replaces `Modal` and `DialogShell` |
-| Toast, ~~Spinner~~ (built), Skeleton | Every screen | Theme-safe toast; spinner with label; shimmer placeholders shaped like their content |
+| ~~Dialog~~ (built; `DialogShell` is an alias) / ConfirmDialog | Almost every screen | One dialog: sizes, header slot, busy lock, cancel/confirm footer, danger variant. Replaces `Modal` and `DialogShell` |
+| Toast, ~~Spinner~~ and ~~Skeleton~~ (built) | Every screen | Theme-safe toast; spinner with label; shimmer placeholders shaped like their content |
 | ~~PageHero~~ (built) | Home, Calendar, Library, Brands, Plan, Campaigns, hubs | Pixel-gradient header that stays readable in both themes; eyebrow, title, line, stats, CTA |
 | LinkTabs | Brand and Settings hubs, Events | `Tabs` driven by routes (NavLink) |
 | ~~Callout~~ (built) | Plan, Campaign, Blog, Emails, AI keys | Toned panel (info/ok/warn/error) with icon, title, body and action. Replaces `WarningBanner` |
-| SearchInput | Feed, Library, Campaigns, Brands, Catalog | Field with a search icon, clear on Esc, optional expand-from-icon |
+| ~~SearchInput~~ (built) | Feed, Library, Campaigns, Brands, Catalog | Field with a search icon, clear on Esc, optional expand-from-icon |
 | ~~ProgressBar~~ (built) / Meter | Home, Calendar, Plan, Brands, Events, Video | Determinate and indeterminate; used/total with an over-limit tone |
 | Dropzone | Library, Identity, Characters, Visual, Canvas, Onboarding, Tools, Phone upload | Drag, paste or click to upload, with an overlay and limits |
 | ChipGroup / ToggleChip | Campaign, Tools, Characters, Voices, Onboarding | Single or multi-select chips with disabled ("coming soon") state |
@@ -90,8 +90,8 @@ they live next to their screen but are built only from ds parts and tokens.
 | Combobox / ModelPicker | Image, Video, Characters, Tools, Pieces, Calendar filters | Searchable select; options with icons and capability notes |
 | FilterMenu | Calendar layers | Multi-select menu that stays open, with dots and counts |
 | TagInput | Campaign hashtags, Blog keywords, Events options | Enter or comma adds, Backspace removes, chips with × |
-| ~~MediaTile~~ (built) + Masonry | Home, Feed, Library, results grids | Image or video tile: hover caption, badge, selection check; masonry layout |
-| BulkActionBar | Feed, Library, Identity | Floating "N selected" bar with actions |
+| ~~MediaTile~~ + ~~Masonry~~ (built) | Home, Feed, Library, results grids | Image or video tile: hover caption, badge, selection check; masonry layout |
+| ~~BulkActionBar~~ (built) | Feed, Library, Identity | Floating "N selected" bar with actions |
 | Slider, NumberField, RadioGroup | Video, Editor, Voices, Events, Sign-up | Standard form controls still missing |
 | ButtonGroup | Calendar, editor toolbars | Joined buttons (prev, today, next) |
 | InlineEdit, SaveIndicator | Library, Voice, Pieces | Fields that save on blur; "saved / unsaved / failed" status |
@@ -119,8 +119,9 @@ first and builds shared components early:
    and SettingsRow.
 3. **Settings tabs** and **Plan**: LinkTabs, Callout, Table, Stat, Meter and
    PricingCard.
-4. **Library** and **Feed**: Dropzone, Masonry, Skeleton, BulkActionBar and
-   Popover.
+4. ~~**Feed**~~ (done): Dialog, DialogHeader, Pager, ConfirmInline,
+   SearchInput, BulkActionBar, Skeleton and Masonry. **Library** still needs
+   Dropzone and Popover.
 5. **Calendar**: CalendarGrid, EventChip, FilterMenu, DateTimePicker and
    ButtonGroup.
 6. **Campaign brief and ideas**: ChipGroup, ChoiceCard, TagInput and
