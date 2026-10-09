@@ -1,5 +1,10 @@
 # Feed header artwork
 
+> **Retired on 9 Oct 2026.** The Feed dropped its editorial header for a clean
+> layout (see [design-system.md](design-system.md)). The images stay in
+> `public/images/feed/`, which the login screen still uses. This page is kept as
+> the record of how they were made.
+
 ## Current version: coral, golden yellow and cobalt
 
 The current header combines [fashion-editorial-v2.jpg](../../../polyvik-panel/public/images/feed/fashion-editorial-v2.jpg), [citrus-studio-v3.jpg](../../../polyvik-panel/public/images/feed/citrus-studio-v3.jpg), and the restored [chrome-bloom-v1.jpg](../../../polyvik-panel/public/images/feed/chrome-bloom-v1.jpg). The portrait anchors the brand coral; the perfume introduces warm golden yellow related to Brasa amber; the blue flower supplies cool contrast with an amber center connecting it to the warm palette. The pixel background and primary color are unchanged. The list lives in `HEADER_ARTWORK` in [`src/pages/Feed.tsx`](../../../polyvik-panel/src/pages/Feed.tsx); layout and motion are described in [design-guide.md](design-guide.md#feed).

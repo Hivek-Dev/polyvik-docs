@@ -89,7 +89,7 @@ opacity modifiers work (`bg-fg/8`).
 
 | Group | Tokens | Use |
 |---|---|---|
-| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. Light is soft UI (Manuel's reference, 9 Oct 2026): a light gray page (neutral 4), cards a step lighter with no outline, a lit top edge and a wide faint shadow (`shadow-card`, `card-edge` transparent); menus and dialogs white. In dark the page is the darkest step, content rises in lightness and a hairline (`card-edge`) outlines cards |
+| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. Light is clean and editorial (Manuel's reference, 9 Oct 2026): a white page, cards a flat light gray (neutral 2) with no outline and no shadow (`card-edge` transparent, `shadow-card` none), and fields and secondary buttons white with a hairline (`raised`). In dark the page is the darkest step, content rises in lightness and a hairline (`card-edge`) outlines cards |
 | Fills | `subtle` · `hover` · `selected` | Control fills · hover · active/selected |
 | Text | `fg` · `fg-muted` · `fg-subtle` | Primary · secondary · hints and metadata (all AA) |
 | Lines | `border-soft` · `border` · `border-strong` | Dividers · outlines · hover outlines |
@@ -99,10 +99,10 @@ opacity modifiers work (`bg-fg/8`).
 | Status solids | `ok-solid` · `warn-solid` · `error-solid` · `info-solid` | Step 9: dots, bars and fills. A pill is `bg-ok/12 text-ok` with an `ok-solid` dot |
 | Brand | `brasa-1/2/3` | The gradient only: logo, create, progress |
 
-Radii: `rounded-ctl` 6 px for controls, `rounded-row` 12 px for rows and tiles,
-`rounded-card` 20 px for cards, `rounded-dialog` 22 px for dialogs and
-popovers, `rounded-media` 14 px for image and video previews and
-`rounded-media-sm` 10 px for small thumbnails. The veil behind dialogs and
+Radii: `rounded-ctl` 6 px for controls, `rounded-row` 10 px for rows and tiles,
+`rounded-card` 16 px for cards, `rounded-dialog` 18 px for dialogs and
+popovers, `rounded-media` 10 px for image and video previews (discreet, the
+image leads) and `rounded-media-sm` 8 px for small thumbnails. The veil behind dialogs and
 drawers is `overlay`, dark in both themes. Shadows: `shadow-xs` sits under controls and cards (none in light,
 where hairlines do the work), `shadow-float` under menus and toasts, and
 `shadow-dialog` under dialogs. Tailwind writes shadow values into utilities at
@@ -163,6 +163,7 @@ the control to everyone.
 | `ConfirmInline` | A destructive action confirmed in place, with a Cancel / Delete pair and no second dialog. |
 | `SearchInput` | A field with a magnifier that clears with Esc or ✕. `collapsible` shows only the magnifier until it's used. |
 | `BulkActionBar` | The floating "N selected" bar with actions and Cancel. |
+| `FeatureCard`, `ScrollRow` | A flat shortcut card (title, what it's for, its action, a visual on the right, 144 px tall) and a horizontal row of tiles with a «next» button. The Feed's Characters and Brand kit use them. |
 | `Skeleton`, `Shimmer`, `Masonry` | Placeholders shaped like their content, and the masonry layout (shortest column, staggered entrance). |
 
 `ui.tsx` still exports the old constants (`btnPrimary`, `inputClass`, `card`,
@@ -194,7 +195,7 @@ The full per-screen map, with missing components and the order, is in
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
 | Home (now at `/hoy`), with its plan card | Migrated (9 Oct 2026) |
-| Feed, now the front page (`/`), with its gallery and image/video dialogs | Migrated (9 Oct 2026) |
+| Feed, now the front page (`/`), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: title «Imagen y video» with tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
 | Every `DialogShell` dialog (chrome only: header and frame) | Migrated through the alias |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
 | Calendar, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
