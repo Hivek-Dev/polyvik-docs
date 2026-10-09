@@ -151,11 +151,23 @@ slots; a different role or note is kept as a separate instruction.
   ([details](text-composition.md)).
 - **One logo rule** (since 8 Oct 2026). Every entry point asks for the logo the
   same way (`logoInScenePrompt`): drawn from the original file in the same
-  generation, the way the brand shows it (`logo_mode`: signature, in the scene or
-  watermark) and at its logo size. Designed pieces (a publication recipe, a mold,
-  a tool's approved copy, campaign pieces, the model-image studio) carry it and
-  read it back; a wrong logo means one more drawing. A free image keeps the logo
-  as a reference and reads it back only if the model drew it.
+  generation, flat as the piece's signature, at the brand's logo size. A brand
+  only says whether its logo appears (`logo_mode`: `none` or `lockup`; the
+  retired «in the scene» and «watermark» modes read as shown since 9 Oct) and
+  how present it is; where it sits is each piece's design (its mold or the
+  image director), and on an object only when a piece asks for it. Designed
+  pieces (a publication recipe, a mold, a tool's approved copy, campaign
+  pieces, the model-image studio) carry it and read it back; a wrong logo means
+  one more drawing. A free image keeps the logo as a reference and reads it back
+  only if the model drew it.
+- **Clean logo files** (since 9 Oct 2026). Brands rarely have a PNG or SVG, and
+  a model copies a logo's file as it sees it (a JPG's white paper, a seal's
+  white middle). ADN → Brand → Logo cleans it: remove the plain paper (free),
+  redraw it alone on transparent (one image, read back), and make its version
+  for dark backgrounds (`logo_dark`, one light ink). The brand says whether the
+  white inside its mark is part of it. The dark version travels with the logo;
+  the model uses whichever contrasts where it sits and the read-back accepts
+  either.
 - The channel sets the aspect. No `trim` or `cover` on the engine output. The
   output is only normalized to the requested size when the ratio mismatch is under
   1.5%; a fallback in another ratio is delivered uncropped.
