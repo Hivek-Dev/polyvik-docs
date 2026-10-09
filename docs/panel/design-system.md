@@ -152,7 +152,7 @@ the control to everyone.
 | `Empty` | An empty state that says what will appear. `variant="inline"` is the one-line dashed row inside a card, and with `to` it becomes the way in. |
 | `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
 | `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
-| `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. `scrim` and `on-scrim` follow the theme: white with dark text in light, black with white text in dark. Images never zoom on hover. `size="sm"` is for small thumbnails. |
+| `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. `scrim` and `on-scrim` follow the theme: white with dark text in light, black with white text in dark. Images never zoom on hover. A clickable image's hover is `mediaHover` (recipes): a 2 px ring inside the edge and an even 8 % dim, no caption or gradient. `size="sm"` is for small thumbnails. |
 | `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
 | `Properties` | Label/value pairs in a quiet bordered list. |
 | `Callout` | A toned notice (`info`, `ok`, `warn`, `error`) with icon, title, body and action. It replaces `WarningBanner`. |
@@ -172,6 +172,9 @@ screens already look like the system. Replace them as screens migrate. When a
 constant has no users left, delete it.
 
 ## Migrating a screen
+
+Everything clickable has a hover state: buttons, chips, fields, tabs (inactive tabs show a gray underline), segmented options and media (`mediaHover`).
+
 
 1. Swap raw `<button>`, `<input>` and `<select>` elements and ui.tsx constants
    for `ds` components.
