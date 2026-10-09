@@ -79,6 +79,7 @@ Polyvik uses **JWT bearer tokens** (`auth.middleware.js`, `signToken` in `auth.s
 
     Then store a 60 s single-use exchange token (the DB stores the hash) and redirect to `PANEL_URL/auth/callback?code=<token>`.
   - `POST /auth/google/exchange { code }` → `{ token: signToken(user), user, tenant }`, the same response shape as `login`.
+- A new Google account goes through the age gate first: the panel asks for the birth date before redirecting to Google and carries it in `state`, and the callback runs `assertAdult` before creating anything (see `architecture/security.md` → Sign-up age gate).
 - Signup honours the same closed-registration flag as email signup, if Polyvik adds one. See `small-gaps.md` §5 for the per-user block that login must check.
 
 **Panel**

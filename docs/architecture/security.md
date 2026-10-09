@@ -90,6 +90,21 @@ Any new webhook is born verified. Never "connect it first and sign it later".
 The user's email identifies them, nothing more. It is not sent to external
 services, neither in headers nor in URLs, unless the user explicitly asks.
 
+## Sign-up age gate
+
+Polyvik is for people 18 and older. Sign-up opens with a neutral age
+screen (`polyvik-panel/src/components/AgeGate.tsx`): it asks for the
+birth date without saying where the line is. Under 18 ends there, and
+the browser remembers it (`localStorage.polyvik_age_gate`), so typing
+another year doesn't reopen the form. The date goes once with `POST
+/api/auth/register` as `birthDate` (`YYYY-MM-DD`), and the API checks it
+again (`polyvik-core/src/utils/adultAge.js`) before doing anything else:
+400 for a missing or impossible date, 403 for under 18. The date is
+never stored. The account keeps only `users.age_confirmed_at`, set when
+the check passed. Accounts created before the gate and those made from
+the staff console have it as NULL. Any new way to create an account,
+such as Google sign-in, has to pass the same check.
+
 ## Checklist when touching code
 
 - [ ] Does the query carry `tenant_id`? The `UPDATE` and `DELETE` too?
