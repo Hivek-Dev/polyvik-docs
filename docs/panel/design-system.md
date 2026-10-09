@@ -64,9 +64,12 @@ get a swatch page for review.
   olive. Steps 1–8 always sit on the page's side of the anchor, so a very dark
   anchor (cobalt in dark) never gets a background lighter than itself. Green
   takes the orange's saturation at every step, so it weighs the same.
-- **Tinted neutrals.** The grays carry a trace of the brand hue (chroma
-  0.005–0.007 at hue 40). In dark they read as warm charcoal and in light as
-  paper, both in the same world as the imagery.
+- **Neutrals per theme.** In dark the grays carry a trace of the brand's
+  warm hue (chroma 0.007 at hue 40) and read as warm charcoal next to the
+  gradient's wine. In light they are a barely cool gray (chroma 0.003 at hue
+  265): crisp, so white content and the warm brand colors stand out instead
+  of sinking into beige. Manuel chose this Linear-like light on 9 Oct 2026,
+  over pure white and a deeper gray.
 - **Status hues** (green and red) are generated at the same weight as the
   brand colors, so a badge never looks louder than the brand.
 
@@ -86,7 +89,7 @@ opacity modifiers work (`bg-fg/8`).
 
 | Group | Tokens | Use |
 |---|---|---|
-| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. In light the page is a warm gray (neutral 3) and content sits on white (neutral 1) so it stands off the page; in dark the page is the darkest step and content rises in lightness |
+| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. In light the page is a very light cool gray (neutral 2, `#f7f8fa`) and content is white, outlined by hairlines with no shadow; in dark the page is the darkest step and content rises in lightness |
 | Fills | `subtle` · `hover` · `selected` | Control fills · hover · active/selected |
 | Text | `fg` · `fg-muted` · `fg-subtle` | Primary · secondary · hints and metadata (all AA) |
 | Lines | `border-soft` · `border` · `border-strong` | Dividers · outlines · hover outlines |
@@ -98,9 +101,13 @@ opacity modifiers work (`bg-fg/8`).
 
 Radii: `rounded-ctl` 6 px for controls, `rounded-row` 8 px for rows and tiles,
 `rounded-card` 10 px for cards, `rounded-dialog` 12 px for dialogs and
-popovers. Shadows: `shadow-xs` sits under controls and cards,
-`shadow-float` under menus and toasts, and `shadow-dialog` under dialogs. Light
-mode leans on shadow, while dark mode leans on hairlines.
+popovers. Shadows: `shadow-xs` sits under controls and cards (none in light,
+where hairlines do the work), `shadow-float` under menus and toasts, and
+`shadow-dialog` under dialogs. Tailwind writes shadow values into utilities at
+build time, so their colors go through `--pv-shadow-*` variables, set per
+theme, to follow the theme. The same goes for `--pv-brasa-deep`, the
+gradient's deep end: wine in dark and orange in light, so the light gradient
+fades to peach instead of pink.
 
 Type scale, in six steps: `text-micro` 12, `text-body` 13, `text-title` 15,
 `text-section` 18, `text-page` 22 and `text-display` 32. Hierarchy comes from
