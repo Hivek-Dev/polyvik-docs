@@ -36,7 +36,7 @@ or needs new domain components.
 |---|---|---|---|---|---|
 | Frame | Top bar and menus | `Layout`, `BrandSwitcher`, `UsagePanel`, `Notifications`, `ToolsMenu` | — | — | Migrated |
 | Day to day | Today (`/hoy`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct); second pass: plain header like Media's title |
-| | Calendar (`/calendario`) | `Calendar.tsx` 601, `CalendarDialogs.tsx` 474 | L | Hero; faint day-cell tints | Pending |
+| | Calendar (`/calendario`) | `Calendar.tsx` 601, `CalendarDialogs.tsx` 474 | L | — | Migrated (9 Oct): plain header with the month's figures, ds filters (layers menu stays open, native selects), flat gray day cells, today outlined in the accent, agenda and dialogs on ds |
 | Content | Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect) | `Feed.tsx` + css, `Gallery.tsx`, `ImageDialog.tsx`, `GridSizeToggle` | L | — | Migrated (9 Oct) |
 | | Community Feed (`/feed`) | `CommunityFeed.tsx` | — | — | Built on the design system (9 Oct) |
 | | Library (`/library`) | `Materials.tsx` 688 | M | Hero; drag overlay | Pending |
