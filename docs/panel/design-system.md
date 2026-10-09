@@ -89,7 +89,7 @@ opacity modifiers work (`bg-fg/8`).
 
 | Group | Tokens | Use |
 |---|---|---|
-| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. In light the page is a very light cool gray (neutral 2, `#f7f8fa`) and content is white, outlined by hairlines with no shadow; in dark the page is the darkest step and content rises in lightness |
+| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. Light is soft UI (Manuel's reference, 9 Oct 2026): a light gray page (neutral 4), cards a step lighter with no outline, a lit top edge and a wide faint shadow (`shadow-card`, `card-edge` transparent); menus and dialogs white. In dark the page is the darkest step, content rises in lightness and a hairline (`card-edge`) outlines cards |
 | Fills | `subtle` · `hover` · `selected` | Control fills · hover · active/selected |
 | Text | `fg` · `fg-muted` · `fg-subtle` | Primary · secondary · hints and metadata (all AA) |
 | Lines | `border-soft` · `border` · `border-strong` | Dividers · outlines · hover outlines |
@@ -99,8 +99,8 @@ opacity modifiers work (`bg-fg/8`).
 | Status solids | `ok-solid` · `warn-solid` · `error-solid` · `info-solid` | Step 9: dots, bars and fills. A pill is `bg-ok/12 text-ok` with an `ok-solid` dot |
 | Brand | `brasa-1/2/3` | The gradient only: logo, create, progress |
 
-Radii: `rounded-ctl` 6 px for controls, `rounded-row` 8 px for rows and tiles,
-`rounded-card` 10 px for cards, `rounded-dialog` 12 px for dialogs and
+Radii: `rounded-ctl` 6 px for controls, `rounded-row` 12 px for rows and tiles,
+`rounded-card` 20 px for cards, `rounded-dialog` 22 px for dialogs and
 popovers, `rounded-media` 14 px for image and video previews and
 `rounded-media-sm` 10 px for small thumbnails. The veil behind dialogs and
 drawers is `overlay`, dark in both themes. Shadows: `shadow-xs` sits under controls and cards (none in light,
