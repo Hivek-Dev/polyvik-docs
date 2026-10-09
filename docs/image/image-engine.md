@@ -149,6 +149,13 @@ slots; a different role or note is kept as a separate instruction.
   result is read back against the approved text and the original logo; when it
   fails, the image is drawn again or the review reports it
   ([details](text-composition.md)).
+- **One logo rule** (since 8 Oct 2026). Every entry point asks for the logo the
+  same way (`logoInScenePrompt`): drawn from the original file in the same
+  generation, the way the brand shows it (`logo_mode`: signature, in the scene or
+  watermark) and at its logo size. Designed pieces (a publication recipe, a mold,
+  a tool's approved copy, campaign pieces, the model-image studio) carry it and
+  read it back; a wrong logo means one more drawing. A free image keeps the logo
+  as a reference and reads it back only if the model drew it.
 - The channel sets the aspect. No `trim` or `cover` on the engine output. The
   output is only normalized to the requested size when the ratio mismatch is under
   1.5%; a fallback in another ratio is delivered uncropped.
