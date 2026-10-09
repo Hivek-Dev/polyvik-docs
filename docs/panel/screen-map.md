@@ -35,7 +35,7 @@ or needs new domain components.
 | Area | Screen (route) | Main files | Size | Light-mode risk | Status |
 |---|---|---|---|---|---|
 | Frame | Top bar and menus | `Layout`, `BrandSwitcher`, `UsagePanel`, `Notifications`, `ToolsMenu` | — | — | Migrated |
-| Day to day | Today (`/hoy`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct) |
+| Day to day | Today (`/hoy`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct); second pass: clean header + PixelBand like Media |
 | | Calendar (`/calendario`) | `Calendar.tsx` 601, `CalendarDialogs.tsx` 474 | L | Hero; faint day-cell tints | Pending |
 | Content | Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect) | `Feed.tsx` + css, `Gallery.tsx`, `ImageDialog.tsx`, `GridSizeToggle` | L | — | Migrated (9 Oct) |
 | | Community Feed (`/feed`) | `CommunityFeed.tsx` | — | — | Built on the design system (9 Oct) |
@@ -115,7 +115,7 @@ Each screen migrates with the components it is missing. Each new component goes
 to the catalog in the same change. The order puts the most visible screens
 first and builds shared components early:
 
-1. ~~**Home**~~ (done): PageHero, MediaTile, MediaBadge, ProgressBar, Chip, Callout, Properties, Spinner, inline Empty.
+1. ~~**Home**~~ (done): MediaTile, MediaBadge, ProgressBar, Chip, Callout, Properties, Spinner, inline Empty. Second pass (9 Oct): the PageHero gave way to Media's pattern, a plain date and greeting over a PixelBand colored by the brand's own pictures, carrying the day's line and its action; free days in the week are flat gray slots.
 2. **Campaigns**, **Brands** and **Account**: SearchInput, Dialog/ConfirmDialog
    and SettingsRow.
 3. **Settings tabs** and **Plan**: LinkTabs, Callout, Table, Stat, Meter and
