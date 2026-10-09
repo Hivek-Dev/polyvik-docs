@@ -42,7 +42,7 @@ or needs new domain components.
 | | Library (`/library`) | `Materials.tsx` 688 | M | Hero; drag overlay | Pending |
 | | Campaigns (`/campaigns`) | `Campaigns.tsx` 212 | S | Hero | Pending |
 | | Campaign brief and ideas (`/campaigns/new`, `/:id`) | `CampaignNew.tsx` 1143, `PieceModals`, `PieceStudio`, `PieceHistory`, `CampaignIdeaPreview` | L | Generation glyph, loader shadow, chips on accent | Pending |
-| | Tools (`/tools`) | `Tools.tsx` 658, Product/Ugc/Carousel/Publication studios + css | L | Studios are dark slabs | Pending |
+| | Tools (`/tools`) | `Tools.tsx` 658, Product/Ugc/Carousel/Publication studios + css | L | — | Migrated (9 Oct): plain headers, catalog cards, ds form and runs; the Product/UGC/Carousel stylesheets now use only semantic tokens (no hexes except the light backdrop behind product photos). PublicationStudio and BrandImageStudio belong to Create image and are pending |
 | | Create image (`/feed/create`) | `ImageCreate.tsx` 371 + css, `MentionField` | M | Glows | Pending |
 | | Create video (`/video/create`) | `VideoCreate.tsx` 372 + css, `VideoSetupWizard`, `VideoDirectionControls` | M–L | White overlays in css | Pending |
 | | Characters (`/characters`) | `CharacterCreate.tsx` 470 + css | M | Minor | Pending |
