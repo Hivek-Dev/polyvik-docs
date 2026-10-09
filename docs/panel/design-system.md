@@ -86,7 +86,7 @@ opacity modifiers work (`bg-fg/8`).
 
 | Group | Tokens | Use |
 |---|---|---|
-| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts |
+| Surfaces | `canvas` · `panel` · `raised` | Page · cards and bars · menus, dialogs, toasts. In light the page is a warm gray (neutral 3) and content sits on white (neutral 1) so it stands off the page; in dark the page is the darkest step and content rises in lightness |
 | Fills | `subtle` · `hover` · `selected` | Control fills · hover · active/selected |
 | Text | `fg` · `fg-muted` · `fg-subtle` | Primary · secondary · hints and metadata (all AA) |
 | Lines | `border-soft` · `border` · `border-strong` | Dividers · outlines · hover outlines |
