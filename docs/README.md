@@ -35,7 +35,7 @@ These documents exist so that anyone, human or agent, can join the project knowi
 | Document | Read it when |
 |---|---|
 | [image/image-engine.md](image/image-engine.md) | When touching image generation, references or providers |
-| [image/text-composition.md](image/text-composition.md) | When touching text inside images (integrated or composited) |
+| [image/text-composition.md](image/text-composition.md) | When touching text inside images (drawn by the image model in one generation) |
 | [image/real-typography.md](image/real-typography.md) | When touching fonts on pieces |
 | [image/editorial-context.md](image/editorial-context.md) | When touching audience, language or editorial review |
 | [image/feed-and-library.md](image/feed-and-library.md) | When touching the Feed, the Library or video previews |

@@ -59,7 +59,7 @@ OUTRO:
 ```
 
 **How in Polyvik.**
-- **Safer design:** generate only the *background motion* with the video model (a colour plate with ambient motion, no logo), and then **overlay the real logo with ffmpeg** in `videoRender.services.js`, which already supports a logo overlay. The logo can then never morph. That is the same "two-stage" principle as the image editorial layer (plan §7). The Seedance start-and-end-frame trick is a fallback option.
+- **Safer design:** generate only the *background motion* with the video model (a colour plate with ambient motion, no logo), and then **overlay the real logo with ffmpeg** in `videoRender.services.js`, which already supports a logo overlay. The logo can then never morph. (Images no longer work this way: since 8 Oct 2026 an image is one generation with its text and logo, never a scene with a logo pasted on it.) The Seedance start-and-end-frame trick is a fallback option.
 - Inputs come from the brand kit: logo (the light/dark variant chosen against the background colour), primary colour, optional tagline rendered with `textToPng` (the same font pipeline as captions).
 - Cost: the ffmpeg-only card (still plus fade, or a Ken Burns zoom) is **free** and is the default. The animated background uses video credits, shown up front.
 - Canvas / Assemble: an "End card" item that can be added to the timeline. Also available in the video editor.

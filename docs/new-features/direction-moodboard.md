@@ -10,7 +10,7 @@ Every saved directive (art direction with palette and palette roles) gets a **mo
 
 - Polyvik stores directives with `palette` and `paletteUsage` (`extractDirective` in `canvas.services.js`), but in the list they are text only. A thumbnail makes a directive recognisable and choosable.
 - The video canvas plan asks for **"a shared style image attached to every clip, which can come from the brand DNA"**, and says a style reference contributes only rendering and colour, never people, text or logos (§3). A subject-free moodboard is exactly that kind of image: it is safe to attach as a style reference to Keyframe and Animate, because it has no faces or logos to leak.
-- Variations (plain backgrounds, textures) are useful as base scenes for the two-stage mockup (plan §7): the scene with a blank surface first, then the exact text and logo.
+- ~~Variations (plain backgrounds, textures) are useful as base scenes for the two-stage mockup (plan §7): the scene with a blank surface first, then the exact text and logo.~~ Discarded on 8 Oct 2026: every image is one generation, so text and logo are never applied on top of a base scene afterwards. Variations stay useful as style references.
 
 ## How Monkey Studio did it
 

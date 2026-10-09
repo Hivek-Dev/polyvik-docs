@@ -14,17 +14,24 @@ Overall pipeline: [Image engine](image-engine.md).
   (structure only, never content to reuse). It returns the visual content and
   `textBlocks` in reading order — exact text, role, hierarchy, placement,
   treatment and emphasis — plus `composition` (scene, protected regions, ordered
-  graphics, flat logo) and `textLayout`.
-- **Who draws depends on `textRender`** (`pieceSettings.services.js`):
+  graphics, logo placement) and `textLayout`.
+- **The image model draws everything, in one generation.** Text, logo and
+  graphics are part of the image the model returns; the app never paints them on
+  top of a generated image afterwards. Who builds the model's guide depends on the
+  model's capabilities, not on a setting:
 
-| Mode | When | What happens |
+| Path | When | What happens |
 |---|---|---|
-| `integrated` (default) | Text allowed, provider OpenAI, font measured | The editorial layer (real font + logo on a gray placeholder, `integratedText.services.js`) is sent to gpt-image as a reference. The model composes the finished piece and may move the text. |
-| `composited` | Chosen explicitly, non-OpenAI provider, or integrated fallback | The provider draws the scene without copy; the app paints panels, veils, shapes, icons, the flat logo and the text with the real font on top. |
-| provider-drawn | No font selected | The provider draws the blocks itself; no font-file fidelity is promised. |
+| `integrated` | Text allowed, the model supports an editorial layer (OpenAI GPT Image) and the font is measured | The editorial layer (real font and real logo over a gray placeholder, at the positions the designer measured, `integratedText.services.js`) is sent as a reference. The model draws the finished piece from it in the same generation and may move the text. |
+| `provider` | The model has no editorial-layer capability (e.g. Nano Banana/Gemini, Seedream), or no font is selected | The model draws the approved text natively from the brief, with the designer's positions as guidance. No font-file fidelity is promised. |
 
-Integrated text was made the default on 23 Sep 2026 because pasted text looked
-like a collage: scene light never touched the letters.
+Either way the result is read back against the approved text and the original
+logo before it is saved.
+
+Integrated text became the default on 23 Sep 2026 because pasted text looked like
+a collage: scene light never touched the letters. On 8 Oct 2026 the campaign
+setting `textRender` (`integrated` | `composited`) was removed together with the
+composited mode: nothing is ever pasted on a generated image, for any provider.
 
 ### Integrated flow
 
@@ -43,12 +50,16 @@ like a collage: scene light never touched the letters.
    Typographic ellipses and invisible word joiners normalize; changed words,
    accents, numbers and other punctuation still produce findings. A missing logo or a
    covered face also fails.
-4. Review-aware clients and worker drafts confirm a copy disagreement on a clearer
-   proof and may repair the same candidate once. An unresolved image is delivered
-   with a visible review warning, never automatically approved or published. Legacy
-   clients retain two integrated attempts followed by the `composited` fallback.
+4. When the read-back fails, the image is drawn again or the failure is reported.
+   Review-aware clients and worker drafts confirm a copy disagreement on a clearer
+   proof and may repair the same candidate once; an unresolved image is delivered
+   with a visible review warning, never automatically approved or published.
+   Campaign pieces without review get a second integrated attempt; if it also
+   fails, the error is reported. A wrong logo makes the engine draw the whole image
+   once more (never on a customer's own key). There is no composited fallback.
 5. `imagePlan.textChecks` records each read; `imagePlan.composition.execution` and
-   `imagePlan.typography.execution` say `integrated`, `composited` or `provider`.
+   `imagePlan.typography.execution` say `integrated` or `provider`. Plans saved
+   before 8 Oct 2026 may still say `composited`.
 
 ### Interactive guided creation
 
@@ -59,12 +70,11 @@ Legacy callers retain their strict contract. A copy disagreement is confirmed on
 a clearer proof (up to 2048 px, JPEG quality 96). If it clears, no image edit runs.
 
 With Polyvik's OpenAI image key, a confirmed editorial issue gets **one** edit of
-the actual candidate, keeping the scene and approved copy in the prompt. Only a
-verified correction replaces the original. Integrated text layers retain their
-approved copy for repair. For protected logos the edit receives the scene before
-logo insertion, then the original file is placed again and verified. A failed edit
-or newly broken logo retains the original candidate and its original logo audit.
-This is inside the existing image
+the actual candidate, keeping the scene and approved copy in the prompt. Integrated
+text layers retain their approved copy for repair. The edit returns a whole new
+image, with the original logo attached as a reference; nothing is pasted on it.
+Only a verified correction replaces the original; a failed edit or a newly broken
+logo retains the original candidate. This is inside the existing image
 credit. BYOK never gets an extra image-provider call for this repair; other
 providers currently skip automatic repair too. Text-key review calls still use
 the normal account text-key routing.
@@ -83,8 +93,8 @@ Logo checks remain blocking.
 Missing files, provider failures and quota errors keep the recovery-card path.
 
 Under the production `lite` profile the editorial finish is skipped for integrated
-pieces; in the composited path the finish can still review a mobile proof over the
-real photo and recompose the layers without regenerating the scene.
+pieces. When it runs, it closes the design before the image is drawn, since no
+editorial layer is painted on the result afterwards.
 
 ## Content rules
 
@@ -103,15 +113,16 @@ finish, when it runs) does see the Molde drawing to judge density and pauses;
 extracted Moldes add their measured zones as suggestions, not coordinates.
 
 A shared background is defined once. Icons are optional and purposeful, not
-symbols inherited from the Molde. The `scene` logo mode stays generative.
+symbols inherited from the Molde. Every logo mode is drawn by the image model;
+`scene` carries the logo on an object of the scene.
 
 ## Validation and fitting
 
 `imageComposition.services.js` validates active properties and canvas bounds.
 Overlap with estimated scene zones, margins, grouping and known contrast come back
 as creative observations, not vetoes. Nothing is validated against Molde bounds.
-The compositor measures the real font and rejects text off canvas, overlapping
-boxes and overflow.
+The editorial layer is measured with the real font; text off canvas, overlapping
+boxes and overflow are rejected before the image model is called.
 
 `typographyFit.services.js` resolves heights and flow with the same measurements:
 
@@ -162,12 +173,16 @@ against scene pixels or transparency: that needs visual review.
   compatibility, exact engine instructions and composition summary.
 - `imageDirector.services.js`: designs in one call. It never uses a Molde image
   or an extraction's original piece as a source of facts.
-- `generation.services.js`: picks the Molde once, decides integrated vs composited,
-  passes one candidate to the shared quality engine for updated callers, preserves
-  the two-attempt fallback for legacy callers, and passes the final composition to the engine.
+- `generation.services.js`: picks the Molde once, decides from the model's
+  capabilities whether the piece is integrated or provider-drawn, passes one
+  candidate to the shared quality engine for updated callers, gives callers without
+  review a second integrated attempt, and passes the final composition to the
+  engine. The engine refuses composition or typography for a model that cannot
+  integrate a layer.
   The Molde's turn is counted only after a successful, non-preview generation.
-- `pieceBrief.services.js`: reserves copy-free zones with real typography; without
-  a chosen font lets the model draw the blocks. The panel's chosen font rules every
+- `pieceBrief.services.js`: writes the text instructions; with real typography the
+  model integrates the measured layer, without a chosen font (or on a model without
+  layers) it draws the approved blocks itself. The panel's chosen font rules every
   block, even with a model image or Molde.
 - `imageBrief` and `imagePlan` keep the blocks; `headline` is derived from the
   dominant block for compatibility. An explicit `textBlocks: []` never resurrects
@@ -199,14 +214,15 @@ Seedream's 4000-character limit previously truncated the tail of long brand
 context, which could remove a guided publication's exact copy and recipe. The
 engine now places an explicit approved-copy contract first, bounds the reference
 captions and then fits optional context into the remaining space. Guided Canvas
-recipes precede brand context too. Empty copy forbids editorial text; composited
-campaigns also request a copy-free scene. Protected logos explicitly stay out of
-the model drawing. If the essential copy itself cannot fit, validation stops
-before reference uploads or a paid prediction; it never silently drops words.
+recipes precede brand context too. Empty copy forbids editorial text. Since 8 Oct
+2026 Seedream draws the approved copy itself, and a supplied logo only when its
+role asks for it; nothing is inserted afterwards. If the essential copy itself
+cannot fit, validation stops before reference uploads or a paid prediction; it
+never silently drops words.
 This strengthens instructions, but provider compliance still needs review.
 
-Real UI validation on 6 October 2026: a Brand studio image preserved its original
-logo file and three approved copy fields. A Seedream infographic first returned
+Real UI validation on 6 October 2026 (before the one-generation rule of 8 Oct): a
+Brand studio image preserved its original logo file and three approved copy fields. A Seedream infographic first returned
 `needs_review` with missing and invented copy; after the prompt-priority fix, an
 explicit refinement using the same candidate and approved strings returned the
 correct title and all three numbered blocks without a review finding. Both

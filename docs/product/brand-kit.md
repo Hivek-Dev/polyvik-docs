@@ -42,6 +42,13 @@ for a saved brand. Routes under `/api/brands/:id/image-studio`: `GET` (context),
   the model images.
 - **Existing model images never travel here.** A model made from a model is the
   copy of a copy.
+- **The logo is drawn in the same generation** (since 8 Oct 2026). The model
+  receives the original file and draws it as the piece's signature, flat and
+  facing the viewer, at the brand's logo size (`discreet`, `normal`,
+  `prominent`). It is read back against the original; a wrong logo makes the
+  engine draw the whole image once more (never on a customer's own key), and if
+  it still fails the review says so. The app never places or pastes the logo, and
+  refinements edit the image itself: there is no separate logo-free scene file.
 - The customer iterates until the image is right and keeps it as a model image.
   `POST …/model` only accepts a signed receipt of a result generated for that
   brand and draft; the client cannot name a URL.

@@ -18,20 +18,25 @@ laid out: [Text composition](text-composition.md).
    glyphs. Minimum size: 3.2% of the short side (`MIN_FONT_SIZE = 0.032`). An error
    goes back to the designer with the measurements (up to three attempts). Copy is
    never cropped, re-cased or letter-compressed.
-4. What the provider receives depends on `textRender`:
-   - `integrated` (default, OpenAI): the measured text and logo rendered with the
-     real font on a gray **editorial layer**, as a reference the model recreates
-     inside the scene; the result is read back and checked
+4. The image model draws the text in the same generation as the image; nothing
+   is overlaid on it afterwards (since 8 Oct 2026, when the `textRender` setting
+   and its composited mode were removed). What the model receives depends on its
+   capabilities:
+   - A model with an editorial layer (OpenAI GPT Image): the measured text and
+     logo rendered with the real font on a gray **editorial layer**, as a
+     reference the model recreates inside the scene
      ([details](text-composition.md#integrated-flow)).
-   - `composited`: the reserved zones and their colors, **without** the editorial
-     copy. After background normalization the app composes the designed graphics
-     and the original flat logo; glyphs are converted to SVG paths and Sharp
-     overlays them at final resolution. The result is not sent to an AI again.
+   - Any other model (e.g. Nano Banana/Gemini, Seedream): the approved text in
+     the brief, with the designer's positions as guidance. The real font file
+     does not reach the model, so its exact shapes are not promised.
+   In both cases the result is read back and checked against the approved text
+   and the original logo.
 5. `imageBrief.typography` stores the design. `imagePlan.typography` records
-   family, file/hash, weight, real size, lines and dimensions (composited), or
    family, layouts and `execution: "integrated"`. The panel shows "Real font" only
-   when the engine returns this audit. `imagePlan.prompt` is the prompt actually
-   sent; the final wording lives in `textBlocks`.
+   when the engine returns this audit. Plans saved before 8 Oct 2026 may instead
+   record file/hash, weight, real size, lines and dimensions of a composited
+   piece. `imagePlan.prompt` is the prompt actually sent; the final wording lives
+   in `textBlocks`.
 
 ## Compatibility and explicit limits
 
@@ -41,18 +46,18 @@ laid out: [Text composition](text-composition.md).
   the generation fails with an explanation; it is never silently substituted.
 - Single-weight families (Archivo Black, Anton…) use their native 400; no fake
   700. Variable fonts vary `wght` only, never width. The selector preview still
-  loads Google Fonts; final PNGs use the pinned, verified files.
-- These are flat editorial text layers. Type on clothing, curves or signs in
-  perspective is out of scope. In integrated mode the image model redraws the
-  letters, so exact glyph shapes are not guaranteed — only the wording, which is
-  verified.
+  loads Google Fonts; the editorial layer uses the pinned, verified files.
+- The editorial layer is flat. Type on clothing, curves or signs in perspective is
+  out of scope. The image model redraws the letters, so exact glyph shapes are not
+  guaranteed — only the wording, which is verified.
 - Free Canvas/Studio and blog images keep their previous contract. "Typography
   of your pieces" applies to the pieces/campaigns flow.
 - Existing pieces are not modified. Regenerating redesigns with the current font.
   An old brief with text and a chosen font but no measurements asks to be
   regenerated.
-- In composited mode the AI may still invade reserved zones or invent letters in
-  the background; contrast against real backgrounds needs visual review.
+- The model may still place text over busy areas or invent letters in the
+  background; no contrast veil is painted on the photo, so legibility against the
+  real scene needs visual review.
 - No data-chart engine and no custom font upload. Missing glyphs produce an
   explicit error.
 
@@ -60,10 +65,10 @@ laid out: [Text composition](text-composition.md).
 
 - `npm test`: all 56 families draw real outlines at normal and maximum weight;
   covers glyph coverage, sizes, accents, case, ligatures, emphasis, overflow,
-  overlaps and final-resolution composition. A missing font fails **before**
+  overlaps and the editorial layer at final resolution. A missing font fails **before**
   calling the provider.
 - `node scripts/preview-typography.mjs /output/path [mascot.png]`: offline
-  comparison of Poppins, Archivo Black and Lora with the production compositor
+  comparison of Poppins, Archivo Black and Lora with the production renderer
   (hand-written design to isolate the fonts).
 - `node scripts/vendor-fonts.mjs` reproduces the files from the pinned revision;
   it is not part of startup or deploy.

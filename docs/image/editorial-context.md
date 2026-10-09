@@ -39,14 +39,14 @@ instructions and outputs.
 > Under the production `lite` profile the finish is **skipped when text is
 > integrated** (the default), and its second review pass is off in every mode.
 > See [AI usage and costs](../architecture/ai-usage-and-costs.md). The contract
-> below applies when it runs (composited pieces, or the `lean`/`baseline` profiles).
+> below applies when it runs (provider-drawn pieces, or the `lean`/`baseline`
+> profiles).
 
 `publicationFinish.services.js` receives the post, the executable design, its
-inputs, the model image and a mobile proof over the generated scene with the real
-graphics, flat logo and font. It adjusts editorial layers while respecting the
-photo that actually exists. Without a real font and with provider-drawn text, the
-finish runs before drawing, since that lettering is not an editable layer. It
-delivers a publication: it keeps the version that works or returns a corrected
+inputs, the model image and a mobile proof of the text and graphics over gray. It
+always runs **before** the image is drawn: since 8 Oct 2026 every image is one
+generation and nothing is painted on it afterwards, so there is no finish over the
+generated scene. It delivers a publication: it keeps the version that works or returns a corrected
 post and/or editorial layers. It may synthesize and redistribute without inventing
 facts. It never returns a list of critiques that leaves the user without an image.
 

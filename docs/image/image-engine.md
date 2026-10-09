@@ -103,8 +103,9 @@ image) and `test/canvasReferences.test.js` (what Create images decides).
   is free; it never displaces the user's references.
 - **Tools** ask for the anchor with `lookAnchor: true` only when they make a
   designed piece (ad variations, the carousel cover). Photo tools (product shoot,
-  UGC, app mockups) take none: a finished designed piece as a look would turn a
-  product photo into a poster.
+  UGC) take none: a finished designed piece as a look would turn a product photo
+  into a poster. The app mockups tool, which pasted the customer's screenshot on a
+  generated green screen, was removed on 8 Oct 2026.
 - **The cap** (`MAX_REFERENCES`, 6 explicit references) cuts by priority after
   ordering — anchor, base, layout, character, product, place, logo, content,
   style… — never by arrival order.
@@ -141,6 +142,13 @@ slots; a different role or note is kept as a separate instruction.
 
 ## Rules that still apply
 
+- **One image, one generation** (since 8 Oct 2026). Text, logo and graphics are
+  drawn by the image model inside the image; nothing is pasted on a generated
+  image afterwards, because that reads as a collage. A model with an editorial
+  layer integrates it; any other model draws the approved text natively. The
+  result is read back against the approved text and the original logo; when it
+  fails, the image is drawn again or the review reports it
+  ([details](text-composition.md)).
 - The channel sets the aspect. No `trim` or `cover` on the engine output. The
   output is only normalized to the requested size when the ratio mismatch is under
   1.5%; a fallback in another ratio is delivered uncropped.

@@ -110,7 +110,7 @@ What travels between nodes is a **Shot**, with these fields:
   - keep official assets separate from inspiration;
   - an identical brand block in every piece of a set, with spelling, logo, hex values with their role, typefaces and what is forbidden;
   - an onboarding step that imports the DNA from the brand's website.
-- **Two-stage mockups:** Seedream builds the scene with a blank surface, and the exact text and logo are applied afterwards. Our editorial layer already works this way.
+- ~~**Two-stage mockups:** Seedream builds the scene with a blank surface, and the exact text and logo are applied afterwards.~~ Discarded on 8 Oct 2026: every image is one generation, and text or logo pasted on a generated scene reads as a collage. The editorial layer now travels as a reference the model draws from in that same generation ([text composition](../image/text-composition.md)).
 
 ---
 
