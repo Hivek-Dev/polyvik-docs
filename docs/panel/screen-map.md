@@ -85,16 +85,16 @@ they live next to their screen but are built only from ds parts and tokens.
 | ChoiceCard | Campaign templates, LogoMode, Catalog, BuyDialog, video wizard | A card-sized radio or toggle with title, hint and image |
 | Table | Events, EventDetail, Emails, Usage | Header, hover rows, numeric alignment, row actions, horizontal scroll |
 | SettingsSection / SettingsRow | Features, Connections, AI keys, Account | Label and description left, control right, grouped under a heading |
-| Stat / StatGroup | Calendar, Emails, Usage, Plan | Number above label, in a row or grid. Replaces `StatTile` |
+| ~~Stat / StatGroup~~ (built) | Calendar, Emails, Usage, Plan | Number above label, in a row or grid. Replaces `StatTile` |
 | DatePicker / DateTimePicker | Calendar, Campaign, Events, approve dialog | Replaces native `date` and `datetime-local`, time-zone aware |
 | Popover | Library and Pieces help, filters | Rich floating panel anchored to a trigger (Tooltip is too small) |
 | Combobox / ModelPicker | Image, Video, Characters, Tools, Pieces, Calendar filters | Searchable select; options with icons and capability notes |
-| FilterMenu | Calendar layers | Multi-select menu that stays open, with dots and counts |
+| ~~FilterMenu~~ (built) | Calendar layers | Multi-select menu that stays open, with dots and counts |
 | TagInput | Campaign hashtags, Blog keywords, Events options | Enter or comma adds, Backspace removes, chips with × |
 | ~~MediaTile~~ + ~~Masonry~~ (built) | Home, Feed, Library, results grids | Image or video tile: hover caption, badge, selection check; masonry layout |
 | ~~BulkActionBar~~ (built) | Feed, Library, Identity | Floating "N selected" bar with actions |
 | Slider, NumberField, RadioGroup | Video, Editor, Voices, Events, Sign-up | Standard form controls still missing |
-| ButtonGroup | Calendar, editor toolbars | Joined buttons (prev, today, next) |
+| ~~ButtonGroup~~ (built) | Calendar, editor toolbars | Joined buttons (prev, today, next) |
 | InlineEdit, SaveIndicator | Library, Voice, Pieces | Fields that save on blur; "saved / unsaved / failed" status |
 | Disclosure | Voice, Identity, Catalog | Collapsible section |
 | CopyField, KeyValue, BackLink | Blog, EventDetail | Read-only value with copy; label/value grid; back link |
@@ -103,7 +103,7 @@ they live next to their screen but are built only from ds parts and tokens.
 
 ### Domain components
 
-CalendarGrid, EventChip, WeekStrip (Home), Composer and MentionInput (image,
+CalendarGrid, ~~EventChip~~ (built), WeekStrip (Home), Composer and MentionInput (image,
 video and characters), GenerationTile (campaign ideas), PieceHistory timeline,
 PricingCard, ColorField, FontPicker, SocialPostMock (`PostPreview`), Prose
 (markdown article), FormBuilder (event fields), AudioPlayer, VideoPlayer,
@@ -123,8 +123,10 @@ first and builds shared components early:
 4. ~~**Feed**~~ (done): Dialog, DialogHeader, Pager, ConfirmInline,
    SearchInput, BulkActionBar, Skeleton and Masonry. **Library** still needs
    Dropzone and Popover.
-5. **Calendar**: CalendarGrid, EventChip, FilterMenu, DateTimePicker and
-   ButtonGroup.
+5. ~~**Calendar**~~ (done 9 Oct): EventChip, FilterMenu, ButtonGroup and
+   Stat/StatGroup are built; each day shows its first creative as a cover.
+   CalendarGrid stays in the page, and DateTimePicker is still pending
+   (reschedule uses the native input).
 6. **Campaign brief and ideas**: ChipGroup, ChoiceCard, TagInput and
    GenerationTile.
 7. **Brand hub**: ColorField, FontPicker, Disclosure and InlineEdit.

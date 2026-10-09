@@ -143,9 +143,13 @@ the control to everyone.
 | `Field` | Label, hint and error. It hands `id`, `aria-invalid` and `aria-describedby` to its control. |
 | `Input`, `Textarea`, `Select` | Hairline outline, darker on hover, accent ring on focus, red when invalid. |
 | `Checkbox`, `Toggle` | `Checkbox` for choices in a form, `Toggle` for on/off of something that already exists. |
-| `Tabs` | `underline` for sections of a page, `pill` for filters over a list. Arrow keys move between tabs. The underline slides to the chosen tab; a hovered tab shows a gray fill behind its label. |
+| `Tabs` | `underline` for sections of a page, `pill` for filters over a list. Arrow keys move between tabs. The gray underline slides to the chosen tab; a hovered tab shows a gray fill behind its label. |
 | `Segmented` | Switches between views of the same thing (grid/list, week/month). Its raised thumb slides to the chosen option. |
 | `Menu` | Dropdown with labels, separators, shortcuts, checked items and danger items. Handles keyboard, Escape and outside click, and returns focus to the trigger. |
+| `FilterMenu` | Multi-select filter that stays open while you toggle: checkbox, optional color dot and count per option; the trigger shows the dots of what's on and a summary. |
+| `ButtonGroup` | Buttons joined into one control (prev · today · next): one outline, hairlines between. Put ghost buttons inside. |
+| `Stat`, `StatGroup` | A figure: big number, label, optional hint and a small visual on the right (bars, sparkline). `tone` only when it asks for attention; `onClick` turns it into a shortcut. The group is two per row on small screens and `columns` from lg. |
+| `EventChip` | Something scheduled: tone bar on the left, the creative as a tiny thumbnail (or an icon), time and text. Pending tints it warn, errors red, done ones go quiet; draggable. |
 | `Tooltip` | A short label after a beat. Never the only place where something is said. |
 | `Badge`, `Kbd`, `Avatar` | Status pills (tone + dot), keys, people and brands. |
 | `Card`, `CardHeader`, `List`, `ListRow` | Card with a hairline; lists with rows split by hairlines, edge to edge. |
