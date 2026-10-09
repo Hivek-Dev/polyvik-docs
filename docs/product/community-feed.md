@@ -25,6 +25,33 @@ share. It started on 9 Oct 2026.
 - **Getting there.** The band under Media's tabs leads to the Feed with
   "Ir al Feed", and the Feed has "Ir a Media" for the way back.
 
+## Polyvik's own posts
+
+Polyvik posts to the Feed from the staff console (Platform → Feed, admins
+only). The posts are authored by a house account: a tenant and brand named
+«Polyvik» with the site's mark as avatar. The account is created the first
+time it's needed and remembered in `platform_settings` (`feed_house`).
+
+To post, an admin writes a prompt or starts from one of four ideas, one per
+ratio (1:1, 4:5, 9:16, 16:9). Then they pick the model and generate with the
+Canvas pipeline, without brand style. The image lands in the house brand's
+Media, and from there it is published, unpublished or discarded. Every step
+goes to the activity log.
+
+The four ideas come from research on what stops the scroll:
+
+- light with a direction;
+- one dominant color, a secondary one and a rare accent;
+- tactile materials such as resin, glass and chrome;
+- composition made for the ratio;
+- blank surfaces described in positive terms instead of "no text".
+
+Endpoints: `GET /api/admin/feed`, `POST /api/admin/feed/images`,
+`PUT /api/admin/feed/images/:assetId/published` and
+`DELETE /api/admin/feed/images/:assetId`. The service is in
+`services/houseFeed.services.js` and the console page in
+`polyvik-console/src/pages/FeedStudio.tsx`.
+
 ## Where it lives
 
 - Core: migration `097_community_feed.sql` creates `feed_posts` and
