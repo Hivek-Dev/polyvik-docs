@@ -64,12 +64,12 @@ get a swatch page for review.
   olive. Steps 1–8 always sit on the page's side of the anchor, so a very dark
   anchor (cobalt in dark) never gets a background lighter than itself. Green
   takes the orange's saturation at every step, so it weighs the same.
-- **Neutrals per theme.** In dark the grays carry a trace of the brand's
-  warm hue (chroma 0.007 at hue 40) and read as warm charcoal next to the
-  gradient's wine. In light they are a barely cool gray (chroma 0.003 at hue
-  265): crisp, so white content and the warm brand colors stand out instead
-  of sinking into beige. Manuel chose this Linear-like light on 9 Oct 2026,
-  over pure white and a deeper gray.
+- **Neutrals.** Both themes use a barely cool gray (chroma 0.003 at hue
+  265): crisp, so pictures and the warm brand colors stand out instead of
+  sinking into beige. Manuel chose this Linear-like light on 9 Oct 2026,
+  over pure white and a deeper gray. Dark used to be a warm charcoal (chroma
+  0.007 at hue 40) and moved to the same neutral the same day, because it
+  read too brown next to media.
 - **Status hues** (green and red) are generated at the same weight as the
   brand colors, so a badge never looks louder than the brand.
 
