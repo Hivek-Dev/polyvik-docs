@@ -153,7 +153,6 @@ the control to everyone.
 | `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
 | `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
 | `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. `scrim` and `on-scrim` follow the theme: white with dark text in light, black with white text in dark. Images never zoom on hover. `size="sm"` is for small thumbnails. |
-| `.media-outline` | A class for any image or video box. It draws a 1 px hairline inside the media, over it (`--pv-media-outline`: black 10 % in light, white 8 % in dark), so a pale photo doesn't melt into a white card and a dark one doesn't melt into the dark page. `MediaTile`, the gallery tiles and the dialogs' large image already use it. |
 | `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
 | `Properties` | Label/value pairs in a quiet bordered list. |
 | `Callout` | A toned notice (`info`, `ok`, `warn`, `error`) with icon, title, body and action. It replaces `WarningBanner`. |
@@ -195,7 +194,7 @@ The full per-screen map, with missing components and the order, is in
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
 | Home (now at `/hoy`), with its plan card | Migrated (9 Oct 2026) |
-| Feed, now the front page (`/`), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: title «Imagen y video» with tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
+| Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: title «Imagen y video» with tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
 | Every `DialogShell` dialog (chrome only: header and frame) | Migrated through the alias |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
 | Calendar, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |

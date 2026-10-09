@@ -37,7 +37,7 @@ or needs new domain components.
 | Frame | Top bar and menus | `Layout`, `BrandSwitcher`, `UsagePanel`, `Notifications`, `ToolsMenu` | — | — | Migrated |
 | Day to day | Today (`/hoy`) | `Home.tsx`, `PlanCard.tsx` | M | — | Migrated (9 Oct) |
 | | Calendar (`/calendario`) | `Calendar.tsx` 601, `CalendarDialogs.tsx` 474 | L | Hero; faint day-cell tints | Pending |
-| Content | Feed, the front page (`/`; `/feed` redirects) | `Feed.tsx` + css, `Gallery.tsx`, `ImageDialog.tsx`, `GridSizeToggle` | L | — | Migrated (9 Oct) |
+| Content | Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect) | `Feed.tsx` + css, `Gallery.tsx`, `ImageDialog.tsx`, `GridSizeToggle` | L | — | Migrated (9 Oct) |
 | | Library (`/library`) | `Materials.tsx` 688 | M | Hero; drag overlay | Pending |
 | | Campaigns (`/campaigns`) | `Campaigns.tsx` 212 | S | Hero | Pending |
 | | Campaign brief and ideas (`/campaigns/new`, `/:id`) | `CampaignNew.tsx` 1143, `PieceModals`, `PieceStudio`, `PieceHistory`, `CampaignIdeaPreview` | L | Generation glyph, loader shadow, chips on accent | Pending |
