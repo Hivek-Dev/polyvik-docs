@@ -162,6 +162,7 @@ the control to everyone.
 | `ConfirmInline` | A destructive action confirmed in place, with a Cancel / Delete pair and no second dialog. |
 | `SearchInput` | A field with a magnifier that clears with Esc or ✕. `collapsible` shows only the magnifier until it's used. |
 | `BulkActionBar` | The floating "N selected" bar with actions and Cancel. |
+| `PixelHeader`, `PixelField` | A page header inside the content column: a card whose background is a living dot-matrix (square pixels with gaps) drifting with a slow noise and lifting under the cursor. Its darkest tone is the card's `panel` fill (the lightest, in light) and pixels rise toward `fg`; quiet on the left where the title sits. It holds still with reduced motion or off screen. Media uses it. |
 | `FeatureCard`, `ScrollRow` | A flat shortcut card (title, what it's for, its action, a visual on the right, 144 px tall) and a horizontal row of tiles with a «next» button. The Feed's Characters and Brand kit use them. |
 | `Skeleton`, `Shimmer`, `Masonry` | Placeholders shaped like their content, and the masonry layout (shortest column, staggered entrance). |
 
@@ -194,7 +195,7 @@ The full per-screen map, with missing components and the order, is in
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
 | Home (now at `/hoy`), with its plan card | Migrated (9 Oct 2026) |
-| Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: title «Imagen y video» with tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
+| Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: a `PixelHeader` titled «Media», tabs (All, Images, Videos, Saved), full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
 | Every `DialogShell` dialog (chrome only: header and frame) | Migrated through the alias |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
 | Calendar, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
