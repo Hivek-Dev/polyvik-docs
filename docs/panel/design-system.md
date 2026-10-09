@@ -151,6 +151,7 @@ the control to everyone.
 | `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
 | `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
 | `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. The scrim and its text use `scrim` and `on-scrim`, which stay the same in both themes because they sit on a photo. |
+| `.media-outline` | A class for any image or video box. It draws a 1 px hairline inside the media, over it (`--pv-media-outline`: black 10 % in light, white 8 % in dark), so a pale photo doesn't melt into a white card and a dark one doesn't melt into the dark page. `MediaTile`, the gallery tiles and the dialogs' large image already use it. |
 | `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
 | `Properties` | Label/value pairs in a quiet bordered list. |
 | `Callout` | A toned notice (`info`, `ok`, `warn`, `error`) with icon, title, body and action. It replaces `WarningBanner`. |
