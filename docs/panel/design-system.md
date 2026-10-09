@@ -143,8 +143,8 @@ the control to everyone.
 | `Field` | Label, hint and error. It hands `id`, `aria-invalid` and `aria-describedby` to its control. |
 | `Input`, `Textarea`, `Select` | Hairline outline, darker on hover, accent ring on focus, red when invalid. |
 | `Checkbox`, `Toggle` | `Checkbox` for choices in a form, `Toggle` for on/off of something that already exists. |
-| `Tabs` | `underline` for sections of a page, `pill` for filters over a list. Arrow keys move between tabs. |
-| `Segmented` | Switches between views of the same thing (grid/list, week/month). |
+| `Tabs` | `underline` for sections of a page, `pill` for filters over a list. Arrow keys move between tabs. The underline slides to the chosen tab; a hovered tab shows a gray fill behind its label. |
+| `Segmented` | Switches between views of the same thing (grid/list, week/month). Its raised thumb slides to the chosen option. |
 | `Menu` | Dropdown with labels, separators, shortcuts, checked items and danger items. Handles keyboard, Escape and outside click, and returns focus to the trigger. |
 | `Tooltip` | A short label after a beat. Never the only place where something is said. |
 | `Badge`, `Kbd`, `Avatar` | Status pills (tone + dot), keys, people and brands. |
@@ -173,7 +173,7 @@ constant has no users left, delete it.
 
 ## Migrating a screen
 
-Everything clickable has a hover state: buttons, chips, fields, tabs (inactive tabs show a gray underline), segmented options and media (`mediaHover`).
+Nothing swaps abruptly: indicators slide, and content that changes with a tab or filter enters with `pv-fade-in` (a 220 ms fade up) before the gallery's cascade; all of it stops with reduced motion. Everything clickable shows the pointer and has a hover state: buttons, chips, fields, tabs (inactive tabs show a gray underline), segmented options and media (`mediaHover`).
 
 
 1. Swap raw `<button>`, `<input>` and `<select>` elements and ui.tsx constants
