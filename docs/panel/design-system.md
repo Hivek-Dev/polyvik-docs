@@ -150,7 +150,7 @@ the control to everyone.
 | `Badge`, `Kbd`, `Avatar` | Status pills (tone + dot), keys, people and brands. |
 | `Card`, `CardHeader`, `List`, `ListRow` | Card with a hairline; lists with rows split by hairlines, edge to edge. |
 | `Empty` | An empty state that says what will appear. `variant="inline"` is the one-line dashed row inside a card, and with `to` it becomes the way in. |
-| `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container. |
+| `PageTitle`, `PageHero` | A plain title row with its main action, or the pixel-gradient header. The gradient fades into the page color where the text sits, so the text uses page tokens and reads in both themes. Put secondary buttons over the color. `bleed={false}` is for use inside a container, and `width` lines the text up with a centered page. Palettes: `brasa`, `azul` (planning) and `neutro` (the theme's own grays, no color; Media uses it so the images carry the color). |
 | `CardHeader` | Title with an optional `count`, a line under it, and on the right either actions or a `link` to the full screen. |
 | `MediaTile`, `MediaBadge` | An image tile with a corner badge and a caption over a scrim. `scrim` and `on-scrim` follow the theme: white with dark text in light, black with white text in dark. Images never zoom on hover. `size="sm"` is for small thumbnails. |
 | `Chip` | A compact clickable label. Its variants are `default` (connected), `dashed` (add one) and `selected`. |
@@ -194,7 +194,7 @@ The full per-screen map, with missing components and the order, is in
 |---|---|
 | Top bar, account, brand, usage, notifications and tools menus | Migrated (9 Oct 2026) |
 | Home (now at `/hoy`), with its plan card | Migrated (9 Oct 2026) |
-| Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: title «Imagen y video» with tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
+| Media (formerly Feed), the front page (`/`; `/feed` and `/media` redirect), with its gallery and image/video dialogs | Migrated (9 Oct 2026). Clean layout: a colorless pixel header titled «Media», tabs (All, Images, Videos, Saved), Characters and Brand kit shortcuts, full-width search with create chips, masonry. The pixel hero and its artwork are gone. |
 | Every `DialogShell` dialog (chrome only: header and frame) | Migrated through the alias |
 | Shared primitives (`ui.tsx` buttons, inputs, cards, pills, Modal, Toast, menus) | Restyled through recipes; callers not yet migrated |
 | Calendar, Library, Campaigns, Tools, Brand, Settings, Account, Plan, creation workspaces, Canvas, editor, Blog, Events | Pending |
