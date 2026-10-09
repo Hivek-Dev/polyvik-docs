@@ -23,6 +23,12 @@ Satoshi, our accent is Brasa and the scale is our own.
 
 - **Neutral first.** Gray surfaces and 1 px hairlines. Color is reserved for
   the accent and for status, so the user's images and brand stand out.
+- **Lines, not blocks.** Every container is a card (`cardClass`, `Card`,
+  `Stat`): a hairline in dark, tone alone in light. What sits inside is
+  split by hairlines (`divide-y`, a `gap-px` grid over `bg-border-soft`),
+  never by gray blocks. The calendar's month is one table of cells on the
+  page tone; lists are rows under dividers. Media is the exception: pictures
+  carry no frame.
 - **Compact.** Body text is 13 px and controls are 28–36 px tall. It is a tool
   people use every day, so density beats air.
 - **One accent per view.** There is a single primary button. The rest are
